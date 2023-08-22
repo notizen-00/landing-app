@@ -51,7 +51,7 @@
           </v-list-group>
       </v-list>
 </template>
-<script>
+<script >
 import { useLayout } from 'vuetify'
 import { inject, computed } from 'vue'
 
