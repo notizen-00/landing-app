@@ -10,6 +10,8 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
+import { pinia } from './Store/pinia'
+import { useStore } from '@/Store/modules'
 
 
 const vuetify = createVuetify({
@@ -31,6 +33,8 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(vuetify)
+            .use(pinia)
+            .provide('store', useStore())
             .mount(el);
     },
     progress: {
