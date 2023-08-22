@@ -13,7 +13,7 @@
           icon="$vuetify"
           title="Gagal Login"
           color="red"
-          :text="form.errors.password"
+          :text="form.errors.email"
           variant="tonal"
         ></v-alert>
           <div class="text-subtitle-1 text-medium-emphasis">Email </div>
