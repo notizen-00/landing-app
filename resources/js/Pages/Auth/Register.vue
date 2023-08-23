@@ -66,19 +66,16 @@
         
         <v-text-field
         v-model="state.password_confirm"
-        :error-messages="v$.password_confirm.$errors.map(e => e.$message)"
         :counter="10"
         label="Konfirmasi Password"
         type="password"
         required
         autocomplete
-        @input="v$.password_confirm.$touch"
-        @blur="v$.password_confirm.$touch"
         ></v-text-field>
 
         
         </v-sheet>
-        <div v-if="!v$?.password_confirm?.$invalid">Passwords match!</div>
+       
 
         <v-btn
         color="primary"
@@ -158,13 +155,14 @@
   import { Head, Link } from '@inertiajs/vue3';
   import AuthenticationCard from '@/Components/AuthenticationCard.vue';
   import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-  import { reactive } from 'vue';
+  import { reactive,computed } from 'vue';
   import { useVuelidate } from '@vuelidate/core';
   import { email, required,integer,helpers, minLength,sameAs } from '@vuelidate/validators';
   
   const requiredMessage = () => ({ required: helpers.withMessage('Kolom ini Wajib Di Isi', required) });
-  
-  export default {
+  const samePassword = (value) => value.includes('test');
+
+   export default {
     components: {
       AuthenticationCard,
       AuthenticationCardLogo,
@@ -213,9 +211,6 @@
           },
           email: { ...requiredMessage(), email:helpers.withMessage('Harus berisi email yang aktif', email)},
           password: { required },
-          password_confirm: { sameAs:sameAs(function () {
-    return this.state.password;
-  }) },
         },
         v$: null,
         validateStep1: false,
@@ -238,12 +233,20 @@
     methods: {
       nextStep(stepNumber) {
         if (stepNumber === 1) {
+
           // Pada langkah pertama, validasi dan tandai bahwa validasi telah dilakukan
           this.v$?.name?.$touch?.();
           this.v$?.no_hp?.$touch?.();
+          this.v$?.password?.$touch?.();
+  
+          if(this.state.password != this.state.password_confirm) {
+            alert('password tidak cocok')
+          }else{
+            alert('password cocok')
+          }
           this.validateStep1 = true;
   
-          if (!this.v$?.name?.$invalid && !this.v$?.no_hp?.$invalid && !this.v$?.password_confirm?.$invalid) {
+          if (!this.v$?.name?.$invalid && !this.v$?.no_hp?.$invalid ) {
           
             this.step = stepNumber + 1;
           }
