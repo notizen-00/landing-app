@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('mitra', function (Blueprint $table) {
             $table->id();
+            $table->string('no_mitra')->unique();
             $table->integer('user_id');
             $table->integer('program_id');
-            $table->string('nama_mitra');
-            $table->string('deskripsi_mitra')->nullable();
+            $table->string('nama_usaha');
+            $table->string('deskripsi_usaha')->nullable();
             $table->string('nama_kecamatan');
-            $table->string('alamat');
+            $table->string('alamat_usaha');
+            $table->string('no_ijin_usaha');
+            $table->string('npwp_usaha');
             $table->string('status_mitra');
             $table->timestamps();
         });

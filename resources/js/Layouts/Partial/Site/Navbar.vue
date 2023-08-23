@@ -11,9 +11,12 @@
         <v-btn class="mr-10 hover:divide-x-4 " variant="plain">Berita & Pengumuman</v-btn>
   
         <div class="divide-x-4 divide-red-500 d-inline"></div>
-        <v-btn prepend-icon="mdi-login" color="primary" variant="outlined"  @click="ToggleDialog">
+        <Link :href="route('login')">
+        <v-btn prepend-icon="mdi-login" color="primary" variant="outlined">
           Masuk/Daftar
         </v-btn>
+        </Link>
+        
       </div>
       <AuthLayout :dialog="dialog" @update-dialog="ToggleDialog"/>
     </div>
@@ -33,6 +36,7 @@
   
   <script setup>
   import { inject, computed, ref } from 'vue';
+  import { Link } from '@inertiajs/vue3';
   import AuthLayout from '@/Layouts/AuthLayout.vue';
   
   const store = inject('store');

@@ -1,112 +1,182 @@
-<script setup>
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import Checkbox from '@/Components/Checkbox.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-
-const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    terms: false,
-});
-
-const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
-};
-</script>
-
 <template>
     <Head title="Register" />
-
-    <AuthenticationCard>
+    <AuthenticationCard classes="p-0">
         <template #logo>
             <AuthenticationCardLogo />
         </template>
+    <form @submit.prevent="submit">
+    <v-stepper
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
+      v-model="step"
+      :items="items"
+      alt-labels
+      next-text="Next"
+      prev-text="kembali"
+      :editable="step === items.length"
+      :hide-actions="step === items.length"
+      
+      
+    >
+    <template v-slot:item.1 >
+        <h3 class="text-small">Isikan Data Diri Dengan Benar</h3>
+  
+        <br>
+  
+        <v-sheet border>
+            <v-text-field
+            v-model="state.name"
+            :error-messages="v$.name.$errors.map(e => e.$message)"
+            :counter="10"
+            label="Name"
+            required
+            @input="v$.name.$touch"
+            @blur="v$.name.$touch"
+          ></v-text-field>
+        </v-sheet>
+      </template> 
+  
+      <template v-slot:item.2="{ step }">
+        <h3 class="text-h6">Confirm</h3>
+  
+        <br>
+  
+        <v-sheet border>
+          <v-table>
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th class="text-end">Quantity</th>
+                <th class="text-end">Price</th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              <tr v-for="(product, index) in products" :key="index">
+                <td v-text="product.name"></td>
+                <td class="text-end" v-text="product.quantity"></td>
+                <td class="text-end" v-text="product.quantity * product.price"></td>
+              </tr>
+  
+              <tr>
+                <td>Shipping</td>
+                <td></td>
+                <td class="text-end" v-text="shipping"></td>
+              </tr>
+  
+              <tr>
+                <th>Total</th>
+                <th></th>
+                <th class="text-end">
+                  ${{ total }}
+                </th>
+              </tr>
+            </tbody>
+          </v-table>
+          
+        </v-sheet>
+        
+        <v-btn
+        color="primary"
+        variant="outlined"
+        class="mt-4 w-full ml-auto"
+        v-if="step !== items.length"
+        @click="submitForm()"
+        >
+        Register
+      </v-btn>
+      
+      </template>
+    
+    </v-stepper>
+    </form>
+    <div class="flex items-center justify-center mt-4">
+        <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Sudah Punya Akun ?
+        </Link>
+    </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="username"
-                />
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
+    
+</AuthenticationCard>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
+  </template>
+  <script>
 
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthenticationCard from '@/Components/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import { reactive } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { email, required } from '@vuelidate/validators'
+  export default {
+    components: {
+        AuthenticationCard,
+        AuthenticationCardLogo,
+        Head,
+        Link
+    },
+    data: () => ({
+      shipping: 0,
+      step: 2,
+      items: [
+        'Data Diri',
+        'Data Usaha',
+      ],
+      products: [
+        {
+          name: 'Product 1',
+          price: 10,
+          quantity: 2,
+        },
+        {
+          name: 'Product 2',
+          price: 15,
+          quantity: 10,
+        },
+      ],
+      initialState: {
+        name: '',
+        email: '',
+        select: null,
+        checkbox: null,
+      },
+      state: reactive({
+        name: '',
+        email: '',
+        select: null,
+        checkbox: null,
+      }),
+      selectitems: [
+        'Item 1',
+        'Item 2',
+        'Item 3',
+        'Item 4',
+      ],
+      rules: {
+        name: { required },
+        email: { required, email },
+        select: { required },
+        items: { required },
+        checkbox: { required },
+      },
+      v$: null,
+    }),
 
-            <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                <InputLabel for="terms">
-                    <div class="flex items-center">
-                        <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
-                        </div>
-                    </div>
-                    <InputError class="mt-2" :message="form.errors.terms" />
-                </InputLabel>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Already registered?
-                </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
-    </AuthenticationCard>
-</template>
+    computed: {
+      subtotal () {
+        return this.products.reduce((acc, product) => acc + product.quantity * product.price, 0)
+      },
+      total () {
+        return this.subtotal + Number(this.shipping ?? 0)
+      },
+    },
+    methods: {
+    nextStep() {
+      this.step++;
+    },
+    submitForm() {
+      // Perform form submission logic here
+      alert('selesai');
+    },
+  },
+  }
+</script>

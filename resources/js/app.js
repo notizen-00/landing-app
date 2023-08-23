@@ -9,13 +9,18 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { VStepper } from 'vuetify/labs/VStepper'
 import '@mdi/font/css/materialdesignicons.css'
 import { pinia } from './Store/pinia'
 import { useStore } from '@/Store/modules'
 
 
 const vuetify = createVuetify({
-    components,
+    components: {
+        ...components,
+        VStepper,
+      },
+    VStepper,
     directives,
     icons: {
         defaultSet: 'mdi', // This is already the default value - only for display purposes

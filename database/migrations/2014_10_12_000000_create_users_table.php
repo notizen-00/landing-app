@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('role_id');
-            $table->integer('program_id');
             $table->string('no_hp');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
