@@ -13,11 +13,11 @@
       next-text="Next"
       prev-text="kembali"
       :editable="step === items.length"
-      :hide-actions="step === items.length"
+      :hide-actions="step === step"
       
       
     >
-    <template v-slot:item.1 >
+    <template v-slot:item.1="{step}" >
         <h3 class="text-small">Isikan Data Diri Dengan Benar</h3>
   
         <br>
@@ -26,13 +26,68 @@
             <v-text-field
             v-model="state.name"
             :error-messages="v$.name.$errors.map(e => e.$message)"
-            :counter="10"
-            label="Name"
+            label="Nama Lengkap"
             required
             @input="v$.name.$touch"
             @blur="v$.name.$touch"
           ></v-text-field>
+
+          <v-text-field
+          v-model="state.email"
+          :error-messages="v$.email.$errors.map(e => e.$message)"
+          :counter="10"
+          label="Email"
+          required
+          @input="v$.email.$touch"
+          @blur="v$.email.$touch"
+          ></v-text-field>
+
+          <v-text-field
+          v-model="state.no_hp"
+          :error-messages="v$.no_hp.$errors.map(e => e.$message)"
+          :counter="12"
+          label="No Hp"
+          required
+          @input="v$.no_hp.$touch"
+          @blur="v$.no_hp.$touch"
+        ></v-text-field>
+
+        <v-text-field
+        v-model="state.password"
+        :error-messages="v$.password.$errors.map(e => e.$message)"
+        :counter="10"
+        label="Password"
+        type="password"
+        required
+        autocomplete
+        @input="v$.password.$touch"
+        @blur="v$.password.$touch"
+        ></v-text-field>
+        
+        <v-text-field
+        v-model="state.password_confirm"
+        :error-messages="v$.password_confirm.$errors.map(e => e.$message)"
+        :counter="10"
+        label="Konfirmasi Password"
+        type="password"
+        required
+        autocomplete
+        @input="v$.password_confirm.$touch"
+        @blur="v$.password_confirm.$touch"
+        ></v-text-field>
+
+        
         </v-sheet>
+        <div v-if="!v$?.password_confirm?.$invalid">Passwords match!</div>
+
+        <v-btn
+        color="primary"
+        variant="outlined"
+        class="mt-4 w-full ml-auto"
+        @click="nextStep(1)"
+      >
+        Next
+      </v-btn>
       </template> 
   
       <template v-slot:item.2="{ step }">
@@ -100,83 +155,106 @@
 
   </template>
   <script>
-
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-import { reactive } from 'vue'
-import { useVuelidate } from '@vuelidate/core'
-import { email, required } from '@vuelidate/validators'
+  import { Head, Link } from '@inertiajs/vue3';
+  import AuthenticationCard from '@/Components/AuthenticationCard.vue';
+  import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+  import { reactive } from 'vue';
+  import { useVuelidate } from '@vuelidate/core';
+  import { email, required,integer,helpers, minLength,sameAs } from '@vuelidate/validators';
+  
+  const requiredMessage = () => ({ required: helpers.withMessage('Kolom ini Wajib Di Isi', required) });
+  
   export default {
     components: {
-        AuthenticationCard,
-        AuthenticationCardLogo,
-        Head,
-        Link
+      AuthenticationCard,
+      AuthenticationCardLogo,
+      Head,
+      Link,
     },
-    data: () => ({
-      shipping: 0,
-      step: 2,
-      items: [
-        'Data Diri',
-        'Data Usaha',
-      ],
-      products: [
-        {
-          name: 'Product 1',
-          price: 10,
-          quantity: 2,
+    data() {
+      return {
+        shipping: 0,
+        step: 1,
+        items: ['Data Diri', 'Data Usaha'],
+        products: [
+          {
+            name: 'Product 1',
+            price: 10,
+            quantity: 2,
+          },
+          {
+            name: 'Product 2',
+            price: 15,
+            quantity: 10,
+          },
+        ],
+        initialState: {
+          name: '',
+          email: '',
+          no_hp:'',
+          password: '',
+          password_confirm: '',
         },
-        {
-          name: 'Product 2',
-          price: 15,
-          quantity: 10,
+        state: reactive({
+          name: '',
+          email: '',
+          no_hp: '',
+          password:'',
+          password_confirm:''
+        
+        }),
+        selectitems: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
+        rules: {
+          name: requiredMessage(),
+          no_hp: {
+            ...requiredMessage(),
+            integer,
+            minLength: helpers.withMessage('Harus Berisi 4 karakter', minLength(1)),
+          },
+          email: { ...requiredMessage(), email:helpers.withMessage('Harus berisi email yang aktif', email)},
+          password: { required },
+          password_confirm: { sameAs:sameAs(function () {
+    return this.state.password;
+  }) },
         },
-      ],
-      initialState: {
-        name: '',
-        email: '',
-        select: null,
-        checkbox: null,
-      },
-      state: reactive({
-        name: '',
-        email: '',
-        select: null,
-        checkbox: null,
-      }),
-      selectitems: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      rules: {
-        name: { required },
-        email: { required, email },
-        select: { required },
-        items: { required },
-        checkbox: { required },
-      },
-      v$: null,
-    }),
-
+        v$: null,
+        validateStep1: false,
+      };
+    },
+    created() {
+      this.v$ = useVuelidate(this.rules, this.state); // Initialize useVuelidate here
+    },
     computed: {
-      subtotal () {
-        return this.products.reduce((acc, product) => acc + product.quantity * product.price, 0)
+      subtotal() {
+        return this.products.reduce(
+          (acc, product) => acc + product.quantity * product.price,
+          0
+        );
       },
-      total () {
-        return this.subtotal + Number(this.shipping ?? 0)
+      total() {
+        return this.subtotal + Number(this.shipping ?? 0);
       },
     },
     methods: {
-    nextStep() {
-      this.step++;
+      nextStep(stepNumber) {
+        if (stepNumber === 1) {
+          // Pada langkah pertama, validasi dan tandai bahwa validasi telah dilakukan
+          this.v$?.name?.$touch?.();
+          this.v$?.no_hp?.$touch?.();
+          this.validateStep1 = true;
+  
+          if (!this.v$?.name?.$invalid && !this.v$?.no_hp?.$invalid && !this.v$?.password_confirm?.$invalid) {
+          
+            this.step = stepNumber + 1;
+          }
+        } else {
+          this.step = stepNumber + 1;
+        }
+      },
+      submitForm() {
+        // Perform form submission logic here
+        alert('selesai');
+      },
     },
-    submitForm() {
-      // Perform form submission logic here
-      alert('selesai');
-    },
-  },
-  }
-</script>
+  };
+  </script>
