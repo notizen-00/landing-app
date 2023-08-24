@@ -15,8 +15,11 @@
         <slot></slot>
         
       </v-main>
+    
+      <bottom-navbar/>
+        <!-- <Footer/> -->
+
       
-        <Footer/>
      
     </v-layout>
   </template>
@@ -25,11 +28,12 @@
   import { useLayout } from 'vuetify'
   import { inject, computed } from 'vue'
   import Footer from '@/Layouts/Partial/Site/Footer.vue'
-  import NavbarSite from '@/Layouts/Partial/Site/Navbar.vue'
-  import SidebarSite from '@/Layouts/Partial/Site/Mobile/Sidebar.vue'
+  import NavbarSite from '@/Layouts/Partial/Mitra/Mobile/Navbar.vue'
+  import SidebarSite from '@/Layouts/Partial/Mitra/Mobile/Sidebar.vue'
+  import BottomNavbar from '@/Layouts/Partial/Mitra/Mobile/BottomNavbar.vue'
   
   export default {
-    components: { Footer, NavbarSite ,SidebarSite },
+    components: { Footer, NavbarSite ,SidebarSite ,BottomNavbar},
     setup() {
       const store = inject('store')
   
@@ -40,6 +44,8 @@
         get: () => store.overlay.isOverlayActive,
         set: toggleOverlay,
       })
+      
+      
   
       return {
         isOverlayActive,
