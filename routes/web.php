@@ -19,6 +19,8 @@ Route::get('/', function () {
     return Inertia::render('Site/Index');
 });
 
+Route::post('/register_mitra','App\Http\Controllers\MitraController@register')->name('register_mitra');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -27,4 +29,5 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    
 });

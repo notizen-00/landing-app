@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="computedDialog" class="w-full md:w-1/2">
+    <v-dialog v-model="computedDialog" class="w-full md:w-1/3">
       <v-card>
         <v-card-text>
             <div>
