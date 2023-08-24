@@ -24,10 +24,17 @@ Route::post('/register_mitra','App\Http\Controllers\MitraController@register')->
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified',
+    'verified', // Admin role
 ])->group(function () {
+
+
     Route::get('/dashboard', function () {
         return Inertia::render('CheckLayout');
     })->name('dashboard');
-    
+    Route::resource('mitra','App\Http\Controllers\MitraController');
+
 });
+
+
+
+

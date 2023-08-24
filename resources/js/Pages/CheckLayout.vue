@@ -17,9 +17,8 @@ console.log(page.props.auth.user);
     <div>
         <Head :title="title" />
 
-        <AdminLayout v-if="$page.props.auth.user.role_id == 1" />
+        <AdminLayout v-if="$page.props.auth.user.role_id == 1"/>
         <MitraLayout v-if="$page.props.auth.user.role_id == 2"/>
-       
-       
+    
     </div>
 </template>
