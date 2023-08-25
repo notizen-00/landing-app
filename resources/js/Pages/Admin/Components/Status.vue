@@ -12,18 +12,18 @@
 
   <v-chip
   class="ma-2"
-  color="Error"
-  v-if="case_number == 2"
-  text-color="white"
+  color="red"
+  v-if="case_number == 0"
+  text-color="red"
   prepend-icon="mdi-alert-decagram-outline"
   >
-  Tidak Aktif
+  Pending
 </v-chip>
 
 
 </template>
 <script setup>
     defineProps({
-        case_number:Number
+        case_number:String
     })
 </script>

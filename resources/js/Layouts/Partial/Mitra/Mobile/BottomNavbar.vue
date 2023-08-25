@@ -13,21 +13,21 @@
         </v-btn>
       </Link>
   
-      <Link :href="route('pengaturan.index')" class="text-small w-full">
+      <Link :href="route('dashboard')" class="text-small w-full">
         <v-btn>
           <v-icon>mdi-cog</v-icon>
           <span>Setting</span>
         </v-btn>
       </Link>
   
-      <Link :href="route('mitra.index')" class="text-small w-full">
+      <Link :href="route('dashboard')" class="text-small w-full">
         <v-btn>
           <v-icon>mdi-store-outline</v-icon>
           <span>Toko</span>
         </v-btn>
       </Link>
   
-      <Link :href="route('akun.index')" class="text-small w-full">
+      <Link :href="route('dashboard')" class="text-small w-full">
         <v-btn>
           <v-icon>mdi-account</v-icon>
           <span>Account</span>
