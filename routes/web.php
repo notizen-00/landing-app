@@ -14,7 +14,8 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+$admin_path = 'App\Http\Controllers\Admin';
+$mitra_path = 'App\Http\Controllers\Mitra';
 Route::get('/', function () {
     return Inertia::render('Site/Index');
 });
@@ -29,7 +30,7 @@ Route::middleware([
 
 
     Route::middleware(['checkRole:1'])->group(function () {
-      
+       
     Route::get('/admin-app', function () {
             return Inertia::render('AdminDashboard');
         })->name('admin.app');
@@ -41,7 +42,7 @@ Route::middleware([
             return Inertia::render('App/Mitra');
         })->name('mitra.app');
 
-        Route::resource('mitra-app','App\Http\Controllers\MitraController');
+        Route::resource('mitra-app/mitra','App\Http\Controllers\Mitra\TokoController');
 
     });
 
