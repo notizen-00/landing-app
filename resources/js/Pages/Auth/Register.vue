@@ -127,7 +127,9 @@
         prepend-inner-icon="mdi-list-box-outline"
         density="compact"
         label="Jenis Usaha"
-        :items="selectedItem"
+        :items="programList"
+        item-title="nama_program"
+        item-value="id"
         @input="v$.jenis_usaha.$touch"
         @blur="v$.jenis_usaha.$touch"
         ></v-select>
@@ -235,12 +237,15 @@
   import AuthenticationCard from '@/Components/AuthenticationCard.vue';
   import { useVuelidate } from '@vuelidate/core';
   import { email, required, integer, helpers, minLength,sameAs } from '@vuelidate/validators';
+import axios from 'axios';
+import { onMounted } from 'vue';
   
   const requiredMessage = () => ({ required: helpers.withMessage('Kolom ini Wajib Di Isi', required) });
 
   const step = ref(1);
+  const programList = ref([]);
   const items = ref(['Data Diri', 'Data Usaha','Detail Usaha']);
-  
+  const url = window.location.origin;
   const initialState = {
     name: '',
     email: '',
@@ -265,7 +270,17 @@
   });
 
   const passwordConfirm = computed(() => state.password);
-  const selectedItem = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'];
+
+  const programData = async() =>{
+          const result = await axios.get(url+'/api/public/program');
+            programList.value = result.data;
+  }
+
+  onMounted(()=>{
+      programData();
+  })
+
+  // const selectedItem = programList.value;
   const rules = {
     name: requiredMessage(),
     no_hp: {

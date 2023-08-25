@@ -49,9 +49,10 @@ const headers = [
     title: 'ID',
   },
   { key: 'nama_usaha', title: 'Nama Usaha' },
-  { key: 'no_mitra', title: 'Nomor Mitra' },
+  { key: 'users.name', title: 'Nama Mitra' },
   { key: 'alamat_usaha', title: 'Alamat' },
   { key: 'status_mitra', title: 'Status Mitra' },
+  { key: 'created_at' ,title:'Tanggal Registrasi'},
   { key: '', title: 'Action' },
 
 ];

@@ -1,10 +1,8 @@
 <?php
-
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Mitra;
 use App\Services\VerifikasiService;
 
@@ -12,21 +10,8 @@ class MitraController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
      */
     public function index()
-    {
-        $data_mitra = Mitra::with('users')->with('program')->get();
-
-        return Inertia::render('Admin/Mitra/Index',[    
-            'data_mitra' => $data_mitra
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -48,14 +33,6 @@ class MitraController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -71,5 +48,12 @@ class MitraController extends Controller
         //
     }
 
-  
+    public function verifikasi(string $id, VerifikasiService $verifikasiService)
+    {
+
+        $result = $verifikasiService->verifyMitra($id);
+
+        return response()->json($result);
+
+    }
 }

@@ -35,7 +35,7 @@ class MitraController extends Controller
             $data_mitra = [
                 'user_id'=>$user->id,
                 'no_mitra'=>Str::uuid(),
-                'program_id'=>1,
+                'program_id'=>$request->jenis_usaha,
                 'nama_usaha'=>$request->nama_usaha,
                 'deskripsi_usaha'=>'',
                 'nama_kecamatan'=>'test',

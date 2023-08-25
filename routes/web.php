@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::post('/register_mitra','App\Http\Controllers\MitraController@register')->name('register_mitra');
-
+Route::get('/api/public/program','App\Http\Controllers\Api\ProgramController@index')->name('public_api.program');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -33,7 +33,9 @@ Route::middleware([
     $api_path = 'App\Http\Controllers\Api';
 
     Route::resource('api/program',$api_path.'\ProgramController');
-
+    Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController@verifikasi');
+    Route::resource('api/mitra',$api_path.'\MitraController');
+    // Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController');
     Route::middleware(['checkRole:1'])->group(function () {
         $admin_path = 'App\Http\Controllers\Admin';
         Route::get('/admin-app', function () {
