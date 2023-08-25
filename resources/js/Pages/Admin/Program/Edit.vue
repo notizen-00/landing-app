@@ -23,12 +23,12 @@
         color="success"
         type="submit"
         >
-        Simpan
+        Update
         </v-btn>
     </form>
 </template>
 <script setup>
-    import {ref,onMounted,onUnmounted,computed} from 'vue'
+    import {ref,onMounted,onUnmounted,computed,watch} from 'vue'
     import { useForm,usePage} from '@inertiajs/vue3';
     import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
     import axios from 'axios';
@@ -36,26 +36,34 @@
     const props = defineProps({
         detail_program:Object
     })
-    const detail_programs = computed(()=>{ props.detail_program })
-
+    const id_program = ref(null);
     const form = useForm({
-        nama_program:detail_programs.nama_program,
-        deskripsi_program:detail_programs.deskripsi_program
+        nama_program:'',
+        deskripsi_program:''
     });
-   console.log(detail_programs)
+    watch(() => props.detail_program, (newDetailProgram) => {
+    if (newDetailProgram) {
+        form.nama_program = newDetailProgram.nama_program;
+        form.deskripsi_program = newDetailProgram.deskripsi_program;
+        id_program.value = newDetailProgram.id;
+    }
+    });
+    
     const page = usePage();
 
-    const emit = defineEmits(['close-sheet','data-added']);
+    const emit = defineEmits(['close-sheet','data-update','clear-detail']);
     
+   
 
     const submit = () =>{
 
         form.transform(data => ({
+        _method:'put',
         ...data,
-      })).post(route('admin_program.store'), {
+      })).post(route('admin_program.update',{id:id_program.value}), {
         onFinish: () => {
             form.reset('');
-            emit('data-added');
+            emit('data-update');
             emit('close-sheet')
         },
     });

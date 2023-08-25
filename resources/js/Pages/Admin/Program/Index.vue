@@ -43,7 +43,7 @@
                   <td>{{ item.columns.deskripsi_program }}</td>
                   <td><Status :case_number="item.columns.status_program" /></td>
                   <td> 
-                    <v-btn @click="edit(item.columns.id)" icon="mdi-square-edit-outline" color="green" class="mr-2" size="small"></v-btn>
+                    <v-btn @click.prevent="edit(item.columns.id)" icon="mdi-square-edit-outline" color="green" class="mr-2" size="small"></v-btn>
                     <v-btn @click="remove(item.columns.id)" icon="mdi-delete-circle" color="red" size="small"></v-btn>
                     
                   </td>
@@ -69,7 +69,7 @@
             <br>
             <br>
             <div>
-            <FormAdd @data-added="onDataAdded" @close-sheet="sheet_add = !sheet_add"/>
+            <FormAdd @data-update="onDataUpdate" @close-sheet="sheet_add = !sheet_add"/>
             </div>
           </v-card-text>
         </v-card>
@@ -90,7 +90,7 @@
             <br>
             <br>
             <div>
-            <FormEdit :detail_program="detail_programs" />
+            <FormEdit :detail_program="detail_program" @data-update="onDataUpdate" @close-sheet="sheet_edit = !sheet_edit"/>
             </div>
           </v-card-text>
         </v-card>
@@ -101,7 +101,7 @@
 
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue'
-import { ref ,defineProps,onMounted,onUnmounted,computed} from 'vue';
+import { ref ,defineProps,onMounted,onUnmounted,computed,watch} from 'vue';
 import { usePage,Link,useForm } from '@inertiajs/vue3'
 import Status from '@/Pages/Admin/Components/Status.vue'
 import FormAdd from '@/Pages/Admin/Program/Add.vue'
@@ -112,7 +112,6 @@ const page = usePage();
 const url = window.location.origin
 const props = defineProps({
     data_program:Object,
-   
 })
 const sheet_add = ref(false)
 const sheet_edit = ref(false)
@@ -121,7 +120,6 @@ const form = useForm([]);
 const data_program = ref(props.data_program);
 const detail_program = ref(null);
 
-const detail_programs = computed(()=>{ detail_program.value })
 
 const search = ref('');
 const headers = [
@@ -136,25 +134,24 @@ const headers = [
   { key: 'status_program', title: 'Status Program' },
   { key: 'action', title: 'Action' },
 ];
+watch(sheet_edit, (newVal) => {
+    if (!newVal) {
+        detail_program.value = null;
+    }
+});
 
 const edit = async(id) =>{
    
-    
     sheet_edit.value = !sheet_edit.value;
     try{
         const response = await axios.get(url+'/api/program/'+id)
-        detail_programs.value = response.data;
-
-      
+        detail_program.value = response.data;
 
     }catch(error){
 
     }
 
 }
-
-
-
 
 const remove = async(id) =>{
 
@@ -164,7 +161,7 @@ const remove = async(id) =>{
     }
 
 }
-const onDataAdded = async () => {
+const onDataUpdate = async () => {
     try {
         const response = await axios.get(url+'/api/program');
         data_program.value = response.data;

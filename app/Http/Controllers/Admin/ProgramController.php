@@ -83,7 +83,25 @@ class ProgramController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = $request->validate([
+            'nama_program'=>'required',
+            'deskripsi_program'=>'nullable',
+    ]);
+    $data = $validator + [
+            'status_program' => 1,
+        ];
+
+    $program = Program::where('id',$id)->update($data);
+    
+    if($program)
+    {
+        return redirect()->route('admin_program.index')->with('success', 'Data berhasil di Update.');
+
+    }else{
+
+        return redirect()->route('admin_program.index')->with('error', 'Data Gagal di Update.');
+
+    }
     }
 
     /**

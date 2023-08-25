@@ -39,7 +39,7 @@
 
     const page = usePage();
 
-    const emit = defineEmits(['close-sheet','data-added']);
+    const emit = defineEmits(['close-sheet','data-update']);
 
 
     const submit = () =>{
@@ -49,7 +49,7 @@
       })).post(route('admin_program.store'), {
         onFinish: () => {
             form.reset('');
-            emit('data-added');
+            emit('data-update');
             emit('close-sheet')
         },
     });
