@@ -15,7 +15,7 @@ class MitraController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Mitra/Init');
     }
 
     public function register(Request $request)

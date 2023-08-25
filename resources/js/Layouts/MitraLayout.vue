@@ -1,7 +1,14 @@
 <template>
-    <MobileApp v-if="mobile == true"/>
+    <MobileApp v-if="mobile == true">
+        <slot>
 
-    <DesktopLayouts v-else />    
+        </slot>
+    </MobileApp>
+
+    <DesktopLayouts v-else >
+        <slot></slot>
+    </DesktopLayouts>
+
   </template>
   
   <script setup>

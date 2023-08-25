@@ -7,9 +7,6 @@ import MitraLayout from '@/Layouts/MitraLayout.vue';
 defineProps({
     title: String,
 });
-const page = usePage();
-console.log(page.props.auth.user);
-
 
 </script>
 

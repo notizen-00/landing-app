@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,20 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+            
+            // Redirect based on user's role_id
+            Route::middleware(['auth', 'web'])
+                ->get('/dashboard', function () {
+                    $user = Auth::user();
+                    if ($user->role_id == 1) {
+                        return redirect()->route('admin.app');
+                    } elseif ($user->role_id == 2) {
+                        return redirect()->route('mitra.app');
+                    } else {
+                        return redirect(self::HOME);
+                    }
+                })
+                ->name('dashboard');
         });
     }
 }

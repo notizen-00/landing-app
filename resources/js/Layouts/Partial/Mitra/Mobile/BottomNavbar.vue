@@ -1,41 +1,56 @@
 <template>
-  <v-bottom-navigation
-    v-model="tabs"
-    bg-color="purple"
-    mode="shift"
-    class="d-flex d-sm-none"
-  >
-    <!-- <Link :href="route('mitra.index')"> -->
-    <v-btn >
-      <v-icon>mdi-view-dashboard-outline</v-icon>
-      <span>Dashboard</span>
-    </v-btn>
-    <!-- </Link> -->
+    <v-bottom-navigation
+      v-model="tabs"
+      bg-color="primary"
+      mode="shift"
+      class="d-flex d-sm-none "
+    >
+      <Link :href="route('dashboard')"  class="text-small">
+        <v-btn>
+          <v-icon>mdi-view-dashboard-outline</v-icon>
+          <span>Dashboard</span>
+        </v-btn>
+      </Link>
+  
+      <Link :href="route('pengaturan.index')" class="text-small w-full">
+        <v-btn>
+          <v-icon>mdi-cog</v-icon>
+          <span>Setting</span>
+        </v-btn>
+      </Link>
+  
+      <Link :href="route('mitra.index')" class="text-small w-full">
+        <v-btn>
+          <v-icon>mdi-store-outline</v-icon>
+          <span>Toko</span>
+        </v-btn>
+      </Link>
+  
+      <Link :href="route('akun.index')" class="text-small w-full">
+        <v-btn>
+          <v-icon>mdi-account</v-icon>
+          <span>Account</span>
+        </v-btn>
+      </Link>
+    </v-bottom-navigation>
+  </template>
+  
+  <script setup>
+  import { computed, ref, inject } from 'vue'
+  import { Link, usePage } from '@inertiajs/vue3'
 
-    <v-btn>
-      <v-icon>mdi-music-note</v-icon>
-      <span>Music</span>
-    </v-btn>
+  const tabs = ref(0);
+  const page = usePage();
+  console.log(page)
 
-    <v-btn >
-      <v-icon>mdi-store-outline</v-icon>
-      <span>Toko</span>
-    </v-btn>
-
-    <v-btn>
-      <v-icon>mdi-account</v-icon>
-      <span>Account</span>
-    </v-btn>
-  </v-bottom-navigation>
-</template>
-
-<script setup>
-import { computed,ref,inject} from 'vue'
-import { Head, Link,useForm } from '@inertiajs/vue3';
-
-const tabs = ref(0)
-const value = computed(()=> tabs.value)
+  if(page.url === '/mitra'){
+    tabs.value=2;
+  }
 
 
+  
+  
+ 
 
-</script>
+  </script>
+  

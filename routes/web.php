@@ -28,11 +28,27 @@ Route::middleware([
 ])->group(function () {
 
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('CheckLayout');
-    })->name('dashboard');
-    Route::resource('mitra','App\Http\Controllers\MitraController');
+    Route::middleware(['checkRole:1'])->group(function () {
+      
+    Route::get('/admin-app', function () {
+            return Inertia::render('AdminDashboard');
+        })->name('admin.app');
+    });
 
+    Route::middleware(['checkRole:2'])->group(function () {
+   
+        Route::get('/mitra-app', function () {
+            return Inertia::render('App/Mitra');
+        })->name('mitra.app');
+
+        Route::resource('mitra-app','App\Http\Controllers\MitraController');
+
+    });
+
+
+   
+    Route::resource('pengaturan','App\Http\Controllers\SettingController');
+    Route::resource('akun','App\Http\Controllers\AccountController');
 });
 
 

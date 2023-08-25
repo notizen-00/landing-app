@@ -1,7 +1,7 @@
 <template>
     <v-layout ref="app" class="rounded-md">
 
-      <v-app-bar color="grey-lighten-4" name="app-bar">
+      <v-app-bar height="70" name="app-bar" scroll-behavior="elevate">
             <navbar-site/>
       </v-app-bar>
 
