@@ -1,6 +1,13 @@
 <template>
     <div class="d-flex d-sm-none w-full">
-      <v-btn class="mr-auto justify-start w-1/4 pt-6">ICON</v-btn>
+
+      <form @submit.prevent="logout" class="mr-auto justify-center w-1/4 pt-3 ml-3">
+        <v-btn type="submit" color="primary" icon="mdi-logout">
+
+        </v-btn>
+      </form>
+     
+
        <div class="items-center my-auto w-1/2 justify-center">
         <h6 class="text-center ">DASHBOARD</h6>
         </div> 
@@ -16,11 +23,15 @@
   
   <script setup>
   import { inject, computed, ref } from 'vue';
-  import { Link } from '@inertiajs/vue3';
+  import { Link,router } from '@inertiajs/vue3';
 
   const store = inject('store')
   const ToggleNotif = () =>{
   store.overlay.toggleOverlay();
+ }
+
+ const logout = () =>{
+  router.post(route('logout'));
  }
 
   </script>

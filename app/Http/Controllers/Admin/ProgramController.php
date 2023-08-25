@@ -4,15 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Program;
 class ProgramController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $program = Program::get();
+        return Inertia::render('Admin/Program/Index',[
+            'data_program'=>$program
+        ]);
+    }
+
+    public function getData(){
+
+        $program = Program::get();
+
+        return response()->json($program);
     }
 
     /**
@@ -28,7 +40,26 @@ class ProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+                'nama_program'=>'required',
+                'deskripsi_program'=>'nullable',
+        ]);
+        $data = $validator + [
+                'status_program' => 1,
+            ];
+
+        $program = Program::create($data);
+        
+        if($program)
+        {
+            return redirect()->route('admin_program.index')->with('success', 'Data berhasil ditambahkan.');
+
+        }else{
+
+            return redirect()->route('admin_program.index')->with('error', 'Data Gagal ditambahkan.');
+
+        }
+
     }
 
     /**
@@ -60,6 +91,15 @@ class ProgramController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $program = Program::destroy($id);
+        // $program->forceDelete();
+        
+        if (!$program) {
+            return redirect()->route('admin_program.index')->with('error', 'Data tidak ditemukan.');
+        }
+
+    
+        return redirect()->route('admin_program.index')->with('success', 'Data berhasil dihapus.');
     }
 }

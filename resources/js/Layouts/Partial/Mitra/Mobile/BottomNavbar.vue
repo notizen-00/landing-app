@@ -3,7 +3,8 @@
       v-model="tabs"
       bg-color="primary"
       mode="shift"
-      class="d-flex d-sm-none "
+      
+      class="d-flex d-sm-none rounded-lg"
     >
       <Link :href="route('dashboard')"  class="text-small">
         <v-btn>

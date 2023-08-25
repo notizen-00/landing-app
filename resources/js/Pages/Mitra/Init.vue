@@ -1,7 +1,7 @@
 <template>
     <MitraLayout>
   
-        <v-container class="relative bg-primary rounded-t-xl h-screen">
+        <v-container class="relative bg-blue-100 rounded-t-xl h-screen">
             <v-row>
                 <v-col cols="12">
                     <v-sheet
