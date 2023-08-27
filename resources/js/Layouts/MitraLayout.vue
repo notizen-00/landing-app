@@ -16,9 +16,9 @@
   import DesktopLayouts from '@/Layouts/Partial/Mitra/Desktop/DesktopLayout.vue'; // Ganti dengan path yang sesuai
   import { useDisplay} from 'vuetify'
   import { onMounted } from 'vue';
-  const { width, mobile } = useDisplay()
+  const { width, mobile} = useDisplay()
   onMounted(() => {
-   
+  
   })
 
   </script>

@@ -54,14 +54,14 @@
 <script >
 import { useLayout } from 'vuetify'
 import { inject, computed } from 'vue'
+import { router } from '@inertiajs/vue3'
 
 export default {
   setup() {
     const store = inject('store')
 
     const toggleOverlay = () => {
-      store.overlay.toggleOverlay()
-      alert('silahkan Login');
+      router.get('login');
     }
   
     const items = [
