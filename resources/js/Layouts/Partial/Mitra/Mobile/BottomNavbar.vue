@@ -20,7 +20,7 @@
         </v-btn>
       </Link>
   
-      <Link :href="route('dashboard')" class="text-small w-full">
+      <Link :href="route('mitra_toko.index')" class="text-small w-full">
         <v-btn>
           <v-icon>mdi-store-outline</v-icon>
           <span>Toko</span>
@@ -42,9 +42,9 @@
 
   const tabs = ref(0);
   const page = usePage();
-  console.log(page)
 
-  if(page.url === '/mitra'){
+
+  if(page.url === '/mitra-app/mitra_toko'){
     tabs.value=2;
   }
 

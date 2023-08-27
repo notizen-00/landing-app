@@ -5,12 +5,12 @@
             <navbar-site/>
       </v-app-bar>
 
-   
-      <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      <v-main class="d-flex align-center justify-center" >
         <slot></slot>
       </v-main>
     
       <BottomNavbar />
+            <Notification/>
    
     </v-layout>
   </template>
@@ -20,5 +20,6 @@
   import { inject, computed } from 'vue'
   import NavbarSite from '@/Layouts/Partial/Mitra/Mobile/Navbar.vue'
   import BottomNavbar from '@/Layouts/Partial/Mitra/Mobile/BottomNavbar.vue'
+  import Notification from '@/Components/Mitra/Mobile/Notification.vue'
   
   </script>

@@ -54,10 +54,11 @@ Route::middleware([
     Route::middleware(['checkRole:2'])->group(function () {
         $mitra_path = 'App\Http\Controllers\Mitra';
         Route::get('/mitra-app', function () {
-            return Inertia::render('Mitra/Init');
+            return Inertia::render('Mitra/Dashboard');
         })->name('mitra.app');
 
         Route::resource('mitra-app/mitra_toko','App\Http\Controllers\Mitra\TokoController');
+        Route::resource('mitra-app/mitra_produk','App\Http\Controllers\Mitra\ProdukController');
 
     });
 

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Mitra;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,11 +37,16 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+        $id = auth()->user()->id;
+        $status = Mitra::where('user_id', $id)->pluck('status_mitra')->first();
+
         return array_merge(parent::share($request), [
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error')
             ],
+            'status_mitra' => $status
         ]);
     }
 }

@@ -24,6 +24,6 @@
 </template>
 <script setup>
     defineProps({
-        case_number:String
+        case_number:Number
     })
 </script>

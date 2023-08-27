@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mitra;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TokoController extends Controller
 {
@@ -12,7 +13,9 @@ class TokoController extends Controller
      */
     public function index()
     {
-        //
+      
+        return Inertia::render('Mitra/Toko');
+
     }
 
     /**

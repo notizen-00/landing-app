@@ -30,7 +30,7 @@
         {{ props.kolom.columns.alamat_usaha }}
       </td>
       <td>
-        <Status :case_number="props.kolom.columns.status_mitra" />
+        <Status :case_number="convertToInteger(props.kolom.columns.status_mitra)" />
       </td>
       <td>
         {{ formatDate(props.kolom.columns.created_at) }}
@@ -114,6 +114,9 @@
   const url = window.location.origin;
   const show = ref(false)
 
+ const convertToInteger = (value) => {
+      return parseInt(value);
+    }
   const formatDate = (date) => {
       const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
       return new Date(date).toLocaleDateString(undefined, options);
