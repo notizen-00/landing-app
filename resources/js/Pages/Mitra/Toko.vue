@@ -15,6 +15,12 @@
   import { useDisplay} from 'vuetify'
   import { onMounted } from 'vue';
   const { width, mobile} = useDisplay()
+
+  const props = defineProps({
+    data_produk:Object
+  })
+
+  // console.log(props.data_produk);
   onMounted(() => {
   
   })

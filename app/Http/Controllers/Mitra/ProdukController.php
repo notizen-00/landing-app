@@ -43,6 +43,12 @@ class ProdukController extends Controller
             'mitra_id'=>$request->mitra_id
         ];
 
+     
+
+    $produk = Produk::create($data);
+    
+    if($produk)
+    {
         if ($request->hasFile('foto_produk')) {
             $file = $request->file('foto_produk');
             $fileExtension = $file->getClientOriginalExtension();
@@ -50,21 +56,14 @@ class ProdukController extends Controller
             $filePath = 'public/foto_produk';
     
             $file->storeAs($filePath, $fileName);
-    
-            $data['foto_produk'] = $fileName;
+            $produk->update(['foto_produk' => $fileName]);
         }
-
-    $produk = Produk::create($data);
-
-    dd($produk);
-    
-    if($produk)
-    {
-        return redirect()->route('mitra_toko.index')->with('success', 'Data Produk berhasil ditambahkan.');
+        // return redirect()->route('mitra_toko.index')->with('success', 'Data Produk berhasil ditambahkan.');
+        return to_route('mitra_toko.index');
 
     }else{
-
-        return redirect()->route('mitra_toko.index')->with('error', 'Data Produk Gagal ditambahkan.');
+       return to_route('mitra_toko.index');
+        // return redirect()->route('mitra_toko.index')->with('error', 'Data Produk Gagal ditambahkan.');
 
     }
     }

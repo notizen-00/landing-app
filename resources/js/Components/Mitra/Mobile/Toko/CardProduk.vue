@@ -1,18 +1,24 @@
 <template>
 
+  
   <v-window
-  v-model="onboarding"
+  class="mt-2"
   show-arrows="hover"
 >
+
   <v-window-item
-  v-for="n in length"
-  :key="`card-${n}`"
-  v-model="onboarding"
+  v-for="(product, index) in produk" :key="`card-${index}`"
+  
   >
+  <!-- <div class="absolute z-50 w-full left-20"> -->
+  
+  <!-- </div> -->
+
     <v-card
       :loading="loading"
-      class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500"
+      class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500 relative z-10"
     >
+  
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"
@@ -25,14 +31,15 @@
       <v-img
         cover
         height="250"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+        class="m-5"
+        :src="'/storage/foto_produk/'+product.foto_produk"
       ></v-img>
   
       <v-card-item>
-        <v-card-title>Kopi Tubruk {{ n }}</v-card-title>
+        <v-card-title>{{ product.nama_produk }}</v-card-title>
   
         <v-card-subtitle>
-          <span class="me-1">12 Stok Tersedia</span>
+          <span class="me-1">{{ product.stok_produk }} Stok Tersedia</span>
   
           <v-icon
             color="error"
@@ -47,17 +54,10 @@
           align="center"
           class="mx-0"
         >
-          <v-rating
-            :model-value="4.5"
-            color="amber"
-            density="compact"
-            half-increments
-            readonly
-            size="small"
-          ></v-rating>
+      
   
-          <div class="text-grey ms-4">
-            4.5 (413)
+          <div class="text-black ms-1 pb-2">
+            {{ formatRupiah(product.harga_produk) }}
           </div>
         </v-row>
   
@@ -65,33 +65,47 @@
           KendoKenceng Store
         </div>
   
-        <div>Kopi Tubruk Nikmat Gak kenyang di</div>
+        <div>{{ product.deskripsi_produk }}</div>
       </v-card-text>
   
       <v-divider class="mx-4 mb-1"></v-divider>
     </v-card>
 
-    
-
   </v-window-item>
 </v-window>
   </template>
 
-  <script>
-  export default {
-    data: () => ({
-      loading: false,
-      selection: 1,
-      onboarding:0,
-      length: 3,
-    }),
+  <script setup>
+  import { ref,inject,onMounted,computed } from 'vue';
+  import { usePage } from '@inertiajs/vue3'
 
-    methods: {
-      reserve () {
-        this.loading = true
+  const store = inject('store')
+  const page = usePage()
 
-        setTimeout(() => (this.loading = false), 2000)
-      },
-    },
+  
+  const MitraId = page.props.mitra_id;
+  store.produkStore.fetchProduk(MitraId)
+
+
+  const produk = store.produkStore.getProduk;
+
+  const formatRupiah = (number) => {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+  }).format(number);
+};
+
+ 
+  
+  const loading = ref(false);
+  const selection = ref(1);
+  const onboarding = ref(0);
+
+
+  const reserve = () =>{
+     loading.value = !loading.value
+     setTimeout(() => (loading.value = !loading.value),2000)  
   }
+
 </script>

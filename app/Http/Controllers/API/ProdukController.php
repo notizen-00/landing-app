@@ -1,29 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Mitra;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 use App\Models\Produk;
-use App\Models\Mitra;
+use Illuminate\Http\Request;
 
-class TokoController extends Controller
+class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-        // $data_produk = Produk::where('mitra_id',$mitra_id)->get();
-        $user_id = auth()->user()->id;
-        $mitra_id = Mitra::where('user_id',$user_id)->first();
-        $data_produk = Produk::where('mitra_id',$mitra_id->id)->get();
-
-        return Inertia::render('Mitra/Toko',[
-            'data_produk'=>$data_produk
-        ]);
+        $data = Produk::get();
 
     }
 
@@ -51,6 +41,13 @@ class TokoController extends Controller
         //
     }
 
+    public function showByMitra(string $mitra_id)
+    {
+
+        $data = Produk::where('mitra_id', $mitra_id)->get();
+        return response()->json($data);
+
+    }
     /**
      * Show the form for editing the specified resource.
      */

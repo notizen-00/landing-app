@@ -35,6 +35,7 @@
               label="Nama Produk"
               class="mt-10"
               color="info"
+              required
               rounded="xl"
                prepend-inner-icon="mdi-archive-edit-outline"
                variant="solo"
@@ -44,6 +45,7 @@
               clearable
               v-model="form.stok_produk"
               type="number"
+              required
               rounded="xl"
               label="Stok"
               class="mt-1"
@@ -56,6 +58,7 @@
               clearable
               v-model="form.harga_produk"
               rounded="xl"
+              required
               type="number"
               label="Harga Produk"
               class="mt-1"
@@ -68,15 +71,29 @@
               v-model="form.deskripsi_produk"
               label="Deskripsi Produk"
               variant="solo"
+              required
               prepend-inner-icon="mdi-pencil"
               color="info"
               rounded="xl">
 
               </v-textarea>
 
-              <v-file-input v-model="form.foto_produk" clearable label="Foto Produk" variant="outlined"></v-file-input>
+              <v-text-field
+              clearable
+              @input="form.foto_produk = $event.target.files[0]"
+              rounded="xl"
+              type="file"
+              required
+              label="Foto Produk"
+              class="mt-1"
+              color="info"
+               prepend-inner-icon="mdi-upload"
+               variant="solo"
+              ></v-text-field>
+              <!-- <v-file-input v-model="form.foto_produk" clearable label="Foto Produk" variant="outlined"></v-file-input> -->
           
           </div>
+          <input type="hidden" name="mitra_id" v-model="form.mitra_id"/>
           <v-divider></v-divider>
           
           <div class="-bottom-15 w-half right-4 left-4 mx-auto absolute">
@@ -98,9 +115,11 @@
   </template>
   <script setup>
   import { computed,inject } from 'vue'
-  import { useForm } from '@inertiajs/vue3'
+  import { useForm,usePage } from '@inertiajs/vue3'
   const store = inject('store');
   const dialog = computed(()=> store.overlay.isOverlayProductActive);
+  const page = usePage();
+  const MitraId = page.props.mitra_id;
 
     const toggleDialog = () =>{
     store.overlay.toggleOverlayProduct()
@@ -112,19 +131,26 @@
         deskripsi_produk:'',
         harga_produk:'',
         foto_produk:'',
+        mitra_id:MitraId
     });
 
     const submit = () =>{
 
-        form.transform(data => ({
+         form.transform(data => ({
             forceFormData: true,
             ...data,
             })).post(route('mitra_produk.store'), {
           onFinish: () => {
-          
+                toggleDialog();
+                emit('on-finish')
+                alert('data produk berhasil di tambah')
+              
            },
         })
+
     }
+
+    
 
 
 

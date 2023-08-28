@@ -23,5 +23,8 @@
         import HeaderContent from '@/Components/Mitra/Mobile/Toko/HeaderSection.vue';
         import CardProduct from '@/Components/Mitra/Mobile/Toko/CardProduk.vue'
         import AddProduct from '@/Components/Mitra/Mobile/Toko/AddProduct.vue'
+        import { inject,ref } from 'vue'
+
+        const store = inject('store')
 
     </script>
