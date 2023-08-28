@@ -101,12 +101,30 @@
           <!-- </Link> -->
       </td>
     </tr>
+    <v-snackbar
+    v-model="snackbar"
+    color="success"
+    :timeout="timeout"
+  >
+    {{ text }}
+
+    <template v-slot:actions>
+      <v-btn
+        color="white"
+        variant="text"
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref,onMounted } from 'vue';
   import Status from '@/Pages/Admin/Components/Status.vue';
   import axios from 'axios';
+  import {OnDataUpdate} from '@/Service/Mitra'
   
   const props = defineProps({
       kolom: Object
@@ -123,14 +141,24 @@
   }
   
   const showDetails = ref(false);
-  
+  const snackbar = ref(false);
+  const timeout = ref();
+  const text = ref();
+  OnDataUpdate();
   const verifikasi = async(id) => {
-
     try{
 
       const result = await axios.get(url+'/api/mitra/'+id+'/verifikasi');
 
-      console.log(result.data);
+      console.log(result.data.status);
+      if(result.data.status){
+          snackbar.value = true;
+          timeout.value = 2000;
+          text.value = result.data.message;
+      }else{
+
+      }
+    
 
     }catch(e){
 

@@ -13,7 +13,9 @@ class MitraController extends Controller
      */
     public function index()
     {
-        //
+        $data = Mitra::get();
+
+        return response()->json($data);
     }
 
     /**

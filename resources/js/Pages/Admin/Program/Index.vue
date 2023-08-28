@@ -44,7 +44,7 @@
                   <td><Status :case_number="item.columns.status_program" /></td>
                   <td> 
                     <v-btn @click.prevent="edit(item.columns.id)" icon="mdi-square-edit-outline" color="green" class="mr-2" size="small"></v-btn>
-                    <v-btn @click="remove(item.columns.id)" icon="mdi-delete-circle" color="red" size="small"></v-btn>
+                    <v-btn @click.prevent="remove(item.columns.id)" icon="mdi-delete-circle" color="red" size="small"></v-btn>
                     
                   </td>
                 </tr>
@@ -153,11 +153,11 @@ const edit = async(id) =>{
 
 }
 
-const remove = async(id) =>{
+const remove = (id) =>{
 
     if (confirm("Are you sure you want to Delete")) {
         form.delete(route('admin_program.destroy', id));
-        onDataAdded();
+         onDataUpdate(); 
     }
 
 }

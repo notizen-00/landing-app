@@ -38,8 +38,13 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
 
-        $id = auth()->user()->id;
-        $status = Mitra::where('user_id', $id)->pluck('status_mitra')->first();
+        if(empty(auth()->user()->id)){
+            $status = null;
+        }else{
+            $id = auth()->user()->id;
+            $status = Mitra::where('user_id', $id)->pluck('status_mitra')->first();
+        }
+      
 
         return array_merge(parent::share($request), [
             'flash' => [
