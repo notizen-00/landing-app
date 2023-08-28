@@ -2,16 +2,16 @@
     <v-layout ref="app" class="rounded-md">
 
       <v-app-bar height="70" name="app-bar" scroll-behavior="elevate">
-            <navbar-site/>
+            <navbar-site />
       </v-app-bar>
 
-      <v-main class="d-flex align-center justify-center" >
+   
+      <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
         <slot></slot>
       </v-main>
     
       <BottomNavbar />
-            <Notification/>
-   
+      <Notification/>
     </v-layout>
   </template>
 
@@ -21,5 +21,4 @@
   import NavbarSite from '@/Layouts/Partial/Mitra/Mobile/Navbar.vue'
   import BottomNavbar from '@/Layouts/Partial/Mitra/Mobile/BottomNavbar.vue'
   import Notification from '@/Components/Mitra/Mobile/Notification.vue'
-  
   </script>

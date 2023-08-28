@@ -54,7 +54,12 @@ Route::middleware([
     Route::middleware(['checkRole:2'])->group(function () {
         $mitra_path = 'App\Http\Controllers\Mitra';
         Route::get('/mitra-app', function () {
-            return Inertia::render('Mitra/Dashboard');
+
+            $user_id = auth()->user()->id;
+            $data_toko = Mitra::get_data_toko($user_id);
+            return Inertia::render('Mitra/Dashboard',[
+                    'data_toko' => $data_toko
+            ]);
         })->name('mitra.app');
 
         Route::resource('mitra-app/mitra_toko','App\Http\Controllers\Mitra\TokoController');

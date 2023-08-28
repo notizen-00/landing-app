@@ -43,6 +43,7 @@ class HandleInertiaRequests extends Middleware
         }else{
             $id = auth()->user()->id;
             $status = Mitra::where('user_id', $id)->pluck('status_mitra')->first();
+            $nama_toko = Mitra::where('user_id', $id)->pluck('nama_usaha')->first();
         }
       
 
@@ -51,7 +52,8 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error')
             ],
-            'status_mitra' => $status
+            'status_mitra' => $status,
+            'nama_toko'=>$nama_toko
         ]);
     }
 }

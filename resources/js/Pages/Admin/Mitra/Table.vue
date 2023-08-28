@@ -40,7 +40,7 @@
        
           <v-btn
           icon
-          @click.prevent="verifikasi(props.kolom.columns.id)"
+          @click.prevent="OnVerifikasi(props.kolom.columns.id)"
           color="success"
           class="mr-2"
           size="small"
@@ -121,10 +121,10 @@
   </template>
   
   <script setup>
-  import { ref,onMounted } from 'vue';
+  import { ref,onMounted,computed } from 'vue';
   import Status from '@/Pages/Admin/Components/Status.vue';
   import axios from 'axios';
-  import {OnDataUpdate} from '@/Service/Mitra'
+  import {OnDataUpdate,verifikasi} from '@/Service/Mitra'
   
   const props = defineProps({
       kolom: Object
@@ -144,28 +144,23 @@
   const snackbar = ref(false);
   const timeout = ref();
   const text = ref();
-  OnDataUpdate();
-  const verifikasi = async(id) => {
-    try{
+  const emit = defineEmits(['on-verifikasi']);
 
-      const result = await axios.get(url+'/api/mitra/'+id+'/verifikasi');
-
-      console.log(result.data.status);
-      if(result.data.status){
-          snackbar.value = true;
-          timeout.value = 2000;
-          text.value = result.data.message;
-      }else{
-
-      }
+  const OnVerifikasi = async(id) => {
     
-
-    }catch(e){
-
-
-    }
+     const result = await verifikasi(id);
+     snackbar.value = true;
+     timeout.value = 2000;
+     text.value = result.message;
+     emit('on-verifikasi');
 
   };
+
+  const updatedDetail = computed(()=>{ 
+    detail.value
+    
+  });
+
   
   const remove = (id) => {
       // Implement your remove functionality

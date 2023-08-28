@@ -1,8 +1,17 @@
 <template>
+
+  <v-window
+  v-model="onboarding"
+  show-arrows="hover"
+>
+  <v-window-item
+  v-for="n in length"
+  :key="`card-${n}`"
+  v-model="onboarding"
+  >
     <v-card
       :loading="loading"
-      class="mx-auto"
-      max-width="300"
+      class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500"
     >
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
@@ -20,7 +29,7 @@
       ></v-img>
   
       <v-card-item>
-        <v-card-title>Kopi Tubruk</v-card-title>
+        <v-card-title>Kopi Tubruk {{ n }}</v-card-title>
   
         <v-card-subtitle>
           <span class="me-1">12 Stok Tersedia</span>
@@ -60,33 +69,12 @@
       </v-card-text>
   
       <v-divider class="mx-4 mb-1"></v-divider>
-
-      <v-card-actions>
-        <v-btn
-          color="deep-purple-lighten-2"
-          variant="outlined"
-          @click="reserve"
-          prepend-icon="mdi-pencil"
-        >
-          Edit 
-        </v-btn>
-        <v-btn
-        color="red"
-        variant="outlined"
-        prepend-icon="mdi-delete-outline"
-        @click="reserve"
-      >
-        Hapus
-      </v-btn>
-      <v-btn
-      color="black"
-      variant="outlined"
-      @click="reserve"
-    >
-      Archive
-    </v-btn>
-      </v-card-actions>
     </v-card>
+
+    
+
+  </v-window-item>
+</v-window>
   </template>
 
   <script>
@@ -94,6 +82,8 @@
     data: () => ({
       loading: false,
       selection: 1,
+      onboarding:0,
+      length: 3,
     }),
 
     methods: {

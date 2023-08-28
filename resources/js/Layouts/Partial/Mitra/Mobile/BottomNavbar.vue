@@ -1,7 +1,7 @@
 <template>
     <v-bottom-navigation
       v-model="tabs"
-      bg-color="primary"
+      bg-color="info"
       mode="shift"
       
       class="d-flex d-sm-none rounded-lg"
@@ -15,8 +15,8 @@
   
       <Link :href="route('dashboard')" class="text-small w-full">
         <v-btn>
-          <v-icon>mdi-cog</v-icon>
-          <span>Setting</span>
+          <v-icon>mdi-image-area</v-icon>
+          <span>Gallery</span>
         </v-btn>
       </Link>
   

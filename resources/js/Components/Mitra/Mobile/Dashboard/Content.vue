@@ -43,6 +43,7 @@
                       variant="outlined"
                       prepend-icon="mdi-package-variant-closed-plus"
                       size="small"
+                      @click.prevent="addProdukOverlay"
                     >
                       Tambah Produk
                     </v-btn>
@@ -96,3 +97,9 @@
       </v-container>
     </v-card>
   </template>
+  <script setup>
+  import {ref } from 'vue'
+  const addProdukOverlay = ref(true)
+  
+  
+  </script>

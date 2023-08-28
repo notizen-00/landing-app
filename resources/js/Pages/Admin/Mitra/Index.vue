@@ -21,7 +21,7 @@
               :search="search"
             >
             <template v-slot:item="{ item }">
-                <TableBody :kolom="item" />
+                <TableBody :kolom="item" @on-verifikasi="onUpdatedData" />
             </template>
             </v-data-table>
           </v-card>
@@ -33,6 +33,7 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 import TableBody from '@/Pages/Admin/Mitra/Table.vue'
+import { OnDataUpdate } from '@/Service/Mitra'
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -56,5 +57,13 @@ const headers = [
   { key: '', title: 'Action' },
 
 ];
-const data_table = props.data_mitra;
+const data_table = ref(props.data_mitra);
+
+const onUpdatedData = async() =>{
+  
+    const result  = await OnDataUpdate();
+    data_table.value = result;
+
+}
+
 </script>

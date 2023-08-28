@@ -9,7 +9,7 @@
      
 
        <div class="items-center my-auto w-1/2 justify-center">
-        <h6 class="text-center ">TOKO</h6>
+        <h6 class="text-center ">Dashboard</h6>
         </div> 
       <!-- <div class="justify-end w-1/4"> -->
         <v-btn class="text-none w-1/4" @click="ToggleNotif" color="dark" stacked>

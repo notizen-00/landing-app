@@ -10,6 +10,21 @@ export const OnDataUpdate = async() =>{
     
     }catch(error){
 
+        
     }
 
 }
+
+export const verifikasi = async(id) => {
+    try{
+
+      const result = await axios.get(url+'/api/mitra/'+id+'/verifikasi');
+
+      return result.data;
+
+    }catch(e){
+
+
+    }
+
+  };

@@ -8,9 +8,11 @@
           </v-row>
           <v-row>
             <v-col col="12">
-            <CardProduk/>
+            <CardProduct/>
             </v-col>
           </v-row>
+
+          <AddProduct/>
     
         </v-container>
       
@@ -18,7 +20,8 @@
     </template>
     <script setup>
         import MobileLayout from '@/Layouts/Partial/Mitra/Mobile/MobileLayout.vue';
-        import HeaderContent from '@/Components/Mitra/Mobile/Dashboard/HeaderContent.vue';
-        import CardProduk from '@/Components/Mitra/Mobile/Toko/CardProduk.vue'
+        import HeaderContent from '@/Components/Mitra/Mobile/Toko/HeaderSection.vue';
+        import CardProduct from '@/Components/Mitra/Mobile/Toko/CardProduk.vue'
+        import AddProduct from '@/Components/Mitra/Mobile/Toko/AddProduct.vue'
 
     </script>
