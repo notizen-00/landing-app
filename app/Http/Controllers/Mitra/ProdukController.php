@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Mitra;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
+use App\Models\Produk;
 
 class ProdukController extends Controller
 {
@@ -28,7 +31,42 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'nama_produk'=>'required',
+            'deskripsi_produk'=>'nullable',
+            'harga_produk'=>'integer|required',
+            'stok_produk'=>'integer|required',
+            'foto_produk'=>'nullable|mimes:jpg,png,jpeg,gif|dimensions:max_width=500'
+        ]);
+        $data = $validator + [
+            'status_produk' => 1,
+            'mitra_id'=>$request->mitra_id
+        ];
+
+        if ($request->hasFile('foto_produk')) {
+            $file = $request->file('foto_produk');
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $fileExtension;
+            $filePath = 'public/foto_produk';
+    
+            $file->storeAs($filePath, $fileName);
+    
+            $data['foto_produk'] = $fileName;
+        }
+
+    $produk = Produk::create($data);
+
+    dd($produk);
+    
+    if($produk)
+    {
+        return redirect()->route('mitra_toko.index')->with('success', 'Data Produk berhasil ditambahkan.');
+
+    }else{
+
+        return redirect()->route('mitra_toko.index')->with('error', 'Data Produk Gagal ditambahkan.');
+
+    }
     }
 
     /**

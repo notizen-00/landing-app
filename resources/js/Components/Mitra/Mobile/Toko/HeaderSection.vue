@@ -53,8 +53,6 @@ import { ref,computed,inject } from 'vue'
 import Status from "@/Components/Mitra/Mobile/Partial/Status.vue"
 import AddProduct from "@/Components/Mitra/Mobile/Toko/AddProduct.vue"
 
-
-
 const store = inject('store')
 
 const ToggleDialogs = () =>{
