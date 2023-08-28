@@ -38,26 +38,28 @@
                   variant="outlined"
                   color="blue"
                   prepend-icon="mdi-plus"
-                  @click="toggleDialog"
+                  @click="ToggleDialogs"
                   block>
                     Tambah Product
                 </v-btn>
             </div>
         </v-sheet>
-        <AddProduct :dialog="isDialog"/>
+        <AddProduct/>
                 
     </v-col>
 </template>
 <script setup>
-import { ref,computed } from 'vue'
+import { ref,computed,inject } from 'vue'
 import Status from "@/Components/Mitra/Mobile/Partial/Status.vue"
 import AddProduct from "@/Components/Mitra/Mobile/Toko/AddProduct.vue"
 
-const dialog = ref(false);
-const isDialog = computed(()=>{ dialog.value })
-const toggleDialog = () =>{
 
-    dialog.value = !dialog.value;
-}
+
+const store = inject('store')
+
+const ToggleDialogs = () =>{
+  store.overlay.toggleOverlayProduct();
+ }
+
 
 </script>

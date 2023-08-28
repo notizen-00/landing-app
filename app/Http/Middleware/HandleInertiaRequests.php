@@ -40,6 +40,7 @@ class HandleInertiaRequests extends Middleware
 
         if(empty(auth()->user()->id)){
             $status = null;
+            $nama_toko = null;
         }else{
             $id = auth()->user()->id;
             $status = Mitra::where('user_id', $id)->pluck('status_mitra')->first();
