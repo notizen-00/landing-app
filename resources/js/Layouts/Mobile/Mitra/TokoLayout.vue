@@ -7,7 +7,7 @@
           
           </v-row>
           <v-row>
-            <v-col col="12">
+            <v-col col="12" class="relative">
             <CardProduct/>
             </v-col>
           </v-row>

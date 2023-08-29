@@ -2,7 +2,7 @@
 
   
   <v-window
-  class="mt-2"
+  class="mt-10 z-10 relative"
   show-arrows="hover"
 >
 
@@ -10,15 +10,19 @@
   v-for="(product, index) in produk" :key="`card-${index}`"
   
   >
-  <!-- <div class="absolute z-50 w-full left-20"> -->
-  
-  <!-- </div> -->
 
     <v-card
       :loading="loading"
       class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500 relative z-10"
     >
-  
+   
+        <v-btn 
+        color="blue"
+        class="absolute w-full z-50 -mt-7 left-30 top-4"
+        icon="mdi-variant-plus"
+        >
+
+        </v-btn>
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"

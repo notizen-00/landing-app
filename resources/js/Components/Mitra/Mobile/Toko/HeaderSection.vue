@@ -6,7 +6,7 @@
         rounded="lg"
         width="100%"
         color="white"
-        class="pa-4 bg-blue-500/50 text-center rounded-t-xl mx-auto relative"
+        class="pa-4 bg-blue-500/50 text-center rounded-t-xl h-screen mx-auto relative"
         >
         <v-row>
             <v-col cols="12">
@@ -23,17 +23,29 @@
             </v-col>
         </v-row>
 
-        <p class="mb-4 text-start text-slate-900 text-body-3">
-            <v-badge :content="0" color="red">
-                <v-icon icon="mdi-package-variant-closed" color="info" size="x-large"></v-icon>
+        <p class="mb-4 text-start text-slate-900 d-flex  justify-start text-body-3">
+            <v-badge :content="0" color="red" class="w-1/2">
+                 <v-btn prepend-icon="mdi-package-variant-closed" color="yellow" rounded="shaped" class="w-full text-slate-100" size="small" stacked>
+                    <span class="text-large text-h3" >3</span>Produk
+                 </v-btn>
               </v-badge>
+
+              <v-badge :content="0" color="red" class="ml-3 w-1/2">
+                <v-btn prepend-icon="mdi-eye-circle-outline" color="blue-lighten-3" rounded="shaped" class="w-full"  size="small" stacked>
+                   Visitor
+                </v-btn>
+             </v-badge>
+              <!-- <v-badge :content="0" color="red" class="ml-3" floating stacked>
+                <v-icon icon="mdi-eye-circle-outline" color="info" size="x-large"></v-icon>
+                Visitor
+              </v-badge> -->
         
         </p>
         <br>
 
         <v-divider class="mb-4 border-opacity-50" :thickness="4" color="info"></v-divider>
 
-            <div class="text-center">
+            <div class="text-center h-50">
                 <v-btn
                   variant="outlined"
                   color="blue"

@@ -9,9 +9,11 @@ export const useMitraStore = defineStore('mitraStore', {
     actions: {
       setMitraId(id) {
         this.mitraId = id;
+        
       },
     },
     getters: {
       getMitraId: (state) => state.mitraId,
     },
+    persist:true
   })

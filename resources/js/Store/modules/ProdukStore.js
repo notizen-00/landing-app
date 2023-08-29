@@ -26,5 +26,6 @@ export const useProdukStore = defineStore('produkStore', {
   getters: {
         getProduk:(state) => state.produk
   
-  }
+  },
+  persist:true
 })
