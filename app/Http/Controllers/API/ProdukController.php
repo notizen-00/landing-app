@@ -38,7 +38,9 @@ class ProdukController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Produk::findOrFail($id);
+
+        return response()->json($data);
     }
 
     public function showByMitra(string $mitra_id)

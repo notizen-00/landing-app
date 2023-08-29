@@ -15,7 +15,7 @@
           >
        
     
-            <v-toolbar-title>Produk</v-toolbar-title>
+            <v-toolbar-title>Edit Produk</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
               <v-btn
@@ -73,7 +73,6 @@
               variant="solo"
               required
               prepend-inner-icon="mdi-pencil"
-              color="info"
               rounded="xl">
 
               </v-textarea>
@@ -83,7 +82,6 @@
               @input="form.foto_produk = $event.target.files[0]"
               rounded="xl"
               type="file"
-              required
               label="Foto Produk"
               class="mt-1"
               color="info"
@@ -104,7 +102,7 @@
             prepend-icon="mdi-content-save-outline"
             rounded="xl"
             block>
-             Simpan 
+             update
            </v-btn>
           </div>
         </form>
@@ -114,46 +112,51 @@
     </v-row>
   </template>
   <script setup>
-  import { computed,inject } from 'vue'
+  import { computed,inject,watch,ref } from 'vue'
   import { useForm,usePage } from '@inertiajs/vue3'
   const store = inject('store');
-  const dialog = computed(()=> store.overlay.isOverlayProductActive);
+  const dialog = computed(()=> store.overlay.isEditProductActive);
   const page = usePage();
+  const ProdukId = ref();
   const MitraId = store.mitraStore.getMitraId;
 
-  const status_mitra = page.props.status_mitra;
-
-
     const toggleDialog = () =>{
-      if(status_mitra == 1){
-        store.overlay.toggleOverlayProduct()
-      }else{
-
-        alert('Menunggu verifikasi admin');
-      }
-   
+        store.overlay.toggleEditProduct()
+        
     }
+    const detailProdukStore = computed(() => store.produkStore.getDetailProduk); 
 
+    
     const form = useForm({
         nama_produk:'',
         stok_produk:'',
         deskripsi_produk:'',
         harga_produk:'',
         foto_produk:'',
-        mitra_id:MitraId
+    });
+
+    watch(() => detailProdukStore.value, (newDetailProgram) => {
+    if (newDetailProgram) {
+        form.nama_produk= newDetailProgram.nama_produk
+        form.stok_produk = newDetailProgram.stok_produk
+        form.harga_produk = newDetailProgram.harga_produk
+        form.deskripsi_produk = newDetailProgram.deskripsi_produk
+        ProdukId.value = newDetailProgram.id
+    }
     });
 
     const submit = () =>{
 
          form.transform(data => ({
+            _method:'put',
             forceFormData: true,
             ...data,
             }))
-        form.post(route('mitra_produk.store'), {
+        form.post(route('mitra_produk.update',{ id:ProdukId.value }), {
           onFinish: () => {
                 toggleDialog();
                 store.produkStore.fetchProduk(MitraId)
-                alert('data produk berhasil di tambah')
+                alert('data produk berhasil di update')
               
            },
         })

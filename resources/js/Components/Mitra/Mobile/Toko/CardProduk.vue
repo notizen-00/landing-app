@@ -12,19 +12,13 @@
   v-for="(product, index) in produk" :key="`card-${index}`"
   
   >
-
+ 
     <v-card
       :loading="loading"
       class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500 relative z-10"
+     
     >
    
-        <v-btn 
-        color="blue"
-        class="absolute w-full z-50 -mt-7 left-30 top-4"
-        icon="mdi-variant-plus"
-        >
-
-        </v-btn>
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"
@@ -33,13 +27,28 @@
           indeterminate
         ></v-progress-linear>
       </template>
-  
+      <v-hover v-slot="{ isHovering, props }">
       <v-img
         cover
+        v-bind="props"
         height="250"
         class="m-5"
         :src="'/storage/foto_produk/'+product.foto_produk"
-      ></v-img>
+      >
+      <v-overlay
+          :model-value="isHovering"
+          contained
+          scrim="white"
+          class="align-end justify-center"
+        >
+        
+          <v-btn variant="outlined" @click.prevent="editProduk(product.id)" icon="mdi-pencil" color="success" class="mr-2"></v-btn>
+          <v-btn variant="outlined" @click.prevent="deleteProduk(product.id)" icon="mdi-delete" color="red"></v-btn>
+          <v-btn variant="outlined" @click.prevent="archiveProduk(product.id)" icon="mdi-archive-outline" class="ml-2" color="info"></v-btn>
+         
+        </v-overlay>
+      </v-img>
+    </v-hover>
   
       <v-card-item>
         <v-card-title>{{ product.nama_produk }}</v-card-title>
@@ -76,9 +85,12 @@
   
       <v-divider class="mx-4 mb-1"></v-divider>
     </v-card>
+ 
+
 
   </v-window-item>
 </v-window>
+
 
 <v-badge v-if="produk.length < 0" ></v-badge>
   </template>
@@ -98,11 +110,26 @@
   })
   
   const produkStore = computed(() => store.produkStore.getProduk); 
-watch(produkStore, (newProduk, oldProduk) => {
-  
-  produk.value = newProduk
-});
 
+  watch(produkStore, (newProduk, oldProduk) => {
+  
+    produk.value = newProduk
+  });
+
+  const deleteProduk = (ProdukId) =>{
+      store.produkStore.deleteProduk(ProdukId)
+  } 
+
+  const editProduk = async(ProdukId) =>{
+
+       store.overlay.toggleEditProduct();
+      await store.produkStore.fetchDetailProduk(ProdukId);
+
+  }
+
+  const archiveProduk = (ProdukId) =>{
+
+  }
 
   
 

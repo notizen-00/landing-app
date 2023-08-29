@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use App\Models\Produk;
+use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
@@ -89,7 +90,42 @@ class ProdukController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = $request->validate([
+            'nama_produk' => 'required',
+            'deskripsi_produk' => 'nullable',
+            'harga_produk' => 'integer|required',
+            'stok_produk' => 'integer|required',
+            'foto_produk' => 'nullable|mimes:jpg,png,jpeg,gif'
+        ]);
+    
+        $produk = Produk::findOrFail($id);
+    
+        $data = [
+            'nama_produk' => $validator['nama_produk'],
+            'deskripsi_produk' => $validator['deskripsi_produk'],
+            'harga_produk' => $validator['harga_produk'],
+            'stok_produk' => $validator['stok_produk'],
+            'status_produk' => 1
+        ];
+    
+        if ($request->hasFile('foto_produk')) {
+
+            if ($produk->foto_produk) {
+                Storage::delete('public/foto_produk/' . $produk->foto_produk);
+            }
+
+            $file = $request->file('foto_produk');
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $fileExtension;
+            $filePath = 'public/foto_produk';
+    
+            $file->storeAs($filePath, $fileName);
+            $data['foto_produk'] = $fileName;
+        }
+    
+        $produk->update($data);
+    
+        return to_route('mitra_toko.index');
     }
 
     /**

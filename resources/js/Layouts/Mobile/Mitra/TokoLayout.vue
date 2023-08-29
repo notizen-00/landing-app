@@ -13,6 +13,7 @@
           </v-row>
 
           <AddProduct/>
+          <EditProduct/>
     
         </v-container>
       
@@ -23,6 +24,7 @@
         import HeaderContent from '@/Components/Mitra/Mobile/Toko/HeaderSection.vue';
         import CardProduct from '@/Components/Mitra/Mobile/Toko/CardProduk.vue'
         import AddProduct from '@/Components/Mitra/Mobile/Toko/AddProduct.vue'
+        import EditProduct from '@/Components/Mitra/Mobile/Toko/EditProduct.vue'
         import { inject,ref } from 'vue'
 
         const store = inject('store')

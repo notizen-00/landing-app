@@ -5,6 +5,7 @@ export const useOverlayStores = defineStore('overlay', {
   state: () => ({
     overlay: false,
     overlayProduct: false,
+    editProduct: false,
   }),
   actions: {
     toggleOverlay() {
@@ -12,7 +13,11 @@ export const useOverlayStores = defineStore('overlay', {
     },
     toggleOverlayProduct() {
       this.overlayProduct = !this.overlayProduct
-    }
+    },
+    toggleEditProduct(){
+      this.editProduct = !this.editProduct
+    },
+
   },
   getters: {
     isOverlayActive() {
@@ -20,6 +25,9 @@ export const useOverlayStores = defineStore('overlay', {
     },
     isOverlayProductActive() {
       return this.overlayProduct
+    },
+    isEditProductActive() {
+      return this.editProduct
     }
   }
 })

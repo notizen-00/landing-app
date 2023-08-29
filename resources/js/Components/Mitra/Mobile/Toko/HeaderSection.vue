@@ -102,14 +102,24 @@
 </template>
 <script setup>
 import { ref,computed,inject } from 'vue'
+import { usePage} from '@inertiajs/vue3'
 import Status from "@/Components/Mitra/Mobile/Partial/Status.vue"
 import AddProduct from "@/Components/Mitra/Mobile/Toko/AddProduct.vue"
 
 const store = inject('store')
+const page = usePage();
 
-const ToggleDialogs = () =>{
-  store.overlay.toggleOverlayProduct();
- }
+const status_mitra = page.props.status_mitra;
+
+    const ToggleDialogs = () =>{
+      if(status_mitra == 1){
+        store.overlay.toggleOverlayProduct()
+      }else{
+
+        alert('Menunggu verifikasi admin');
+      }
+   
+    }
 
 
 </script>

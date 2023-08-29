@@ -37,6 +37,7 @@ Route::middleware([
     Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController@verifikasi');
     Route::resource('api/mitra',$api_path.'\MitraController');
     Route::get('api/produk/mitra/{id}',$api_path.'\ProdukController@showByMitra')->name('api_produk.bymitra');
+    Route::resource('api/produk',$api_path.'\ProdukController');
     // Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController');
     Route::middleware(['checkRole:1'])->group(function () {
         $admin_path = 'App\Http\Controllers\Admin';
