@@ -119,7 +119,7 @@
   const store = inject('store');
   const dialog = computed(()=> store.overlay.isOverlayProductActive);
   const page = usePage();
-  const MitraId = page.props.mitra_id;
+  const MitraId = store.mitraStore.getMitraId;
 
     const toggleDialog = () =>{
     store.overlay.toggleOverlayProduct()
@@ -142,7 +142,6 @@
             })).post(route('mitra_produk.store'), {
           onFinish: () => {
                 toggleDialog();
-                emit('on-finish')
                 alert('data produk berhasil di tambah')
               
            },

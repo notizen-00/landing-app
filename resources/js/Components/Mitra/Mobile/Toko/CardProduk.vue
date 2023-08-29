@@ -80,18 +80,29 @@
   </template>
 
   <script setup>
-  import { ref,inject,onMounted,computed } from 'vue';
+  import { ref,inject,onMounted,computed,watch } from 'vue';
   import { usePage } from '@inertiajs/vue3'
 
   const store = inject('store')
   const page = usePage()
+  const produk = ref()
+  onMounted( async()=>{
+    const MitraId = page.props.mitra_id;
+  
+   await store.produkStore.fetchProduk(MitraId)
+   console.log(store.produkStore.getProduk)
+
+  })
+  
+  const produkStore = computed(() => store.produkStore.getProduk); // Menggunakan computed untuk memastikan reaktivitas
+
+watch(produkStore, (newProduk, oldProduk) => {
+  // Lakukan aksi atau perubahan yang diperlukan saat produk berubah
+  produk.value = newProduk
+});
+console.log(produk)
 
   
-  const MitraId = page.props.mitra_id;
-  store.produkStore.fetchProduk(MitraId)
-
-
-  const produk = store.produkStore.getProduk;
 
   const formatRupiah = (number) => {
   return new Intl.NumberFormat('id-ID', {

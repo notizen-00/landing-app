@@ -36,7 +36,7 @@ class ProdukController extends Controller
             'deskripsi_produk'=>'nullable',
             'harga_produk'=>'integer|required',
             'stok_produk'=>'integer|required',
-            'foto_produk'=>'nullable|mimes:jpg,png,jpeg,gif|dimensions:max_width=500'
+            'foto_produk'=>'nullable|mimes:jpg,png,jpeg,gif'
         ]);
         $data = $validator + [
             'status_produk' => 1,
