@@ -15,6 +15,7 @@ import { VBottomSheet } from 'vuetify/labs/VBottomSheet'
 import '@mdi/font/css/materialdesignicons.css'
 import { pinia } from './Store/pinia'
 import { useStore } from '@/Store/modules'
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 
 const vuetify = createVuetify({
@@ -43,6 +44,7 @@ createInertiaApp({
             .use(ZiggyVue)
             .use(vuetify)
             .use(pinia)
+            .use(CKEditor)
             .provide('store', useStore())
             .mount(el);
     },
