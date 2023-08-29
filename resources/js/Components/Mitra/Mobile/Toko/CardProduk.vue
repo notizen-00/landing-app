@@ -68,7 +68,7 @@
         </v-row>
   
         <div class="my-4 text-subtitle-1">
-          KendoKenceng Store
+         <v-icon color="blue" class="rounded-xl p-5">mdi-store</v-icon> KendoKenceng Store
         </div>
   
         <div>{{ product.deskripsi_produk }}</div>

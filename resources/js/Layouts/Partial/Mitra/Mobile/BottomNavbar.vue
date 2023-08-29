@@ -1,7 +1,7 @@
 <template>
     <v-bottom-navigation
       v-model="tabs"
-      bg-color="info"
+      bg-color="blue"
       mode="shift"
       
       class="d-flex d-sm-none rounded-lg"

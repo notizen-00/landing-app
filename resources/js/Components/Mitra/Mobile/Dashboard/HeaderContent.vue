@@ -31,24 +31,25 @@
          height="300"
         lazy-src="/img/dashboard.jpg"
         max-width="500"
-        src="/img/dashboard.jpga"
+        src="/img/dashboard.jpg"
 
         >
         <template v-slot:placeholder>
             <div class="bottom-0 absolute ">
-            <v-btn
-            color="blue-lighten-1"
-            class="text-white w-full items-center justify-center left-2/3"
-            variant="outlined"
-             prepend-icon="mdi-arrow-down"
-             @click="scrollTo()"
-            >
-                Lihat Detail
-            </v-btn>
+          
             </div>
           
         </template>
         </v-img>
+        <v-btn
+        color="blue-lighten-1"
+        class="text-white w-full items-center justify-center"
+        variant="outlined"
+         prepend-icon="mdi-arrow-down"
+         @click="scrollTo()"
+        >
+            Lihat Detail
+        </v-btn>
         <p class="mb-4 text-start text-slate-900 text-body-3">
         
         </p>
