@@ -4,9 +4,11 @@
   <v-window
   class="mt-10 z-10 relative"
   show-arrows="hover"
->
+  v-if="produk.length > 0"
+  >
 
   <v-window-item
+ 
   v-for="(product, index) in produk" :key="`card-${index}`"
   
   >
@@ -77,6 +79,8 @@
 
   </v-window-item>
 </v-window>
+
+<v-badge v-if="produk.length < 0" ></v-badge>
   </template>
 
   <script setup>
@@ -85,22 +89,20 @@
 
   const store = inject('store')
   const page = usePage()
-  const produk = ref()
+  const produk = ref([])
   onMounted( async()=>{
     const MitraId = page.props.mitra_id;
   
    await store.produkStore.fetchProduk(MitraId)
-   console.log(store.produkStore.getProduk)
 
   })
   
-  const produkStore = computed(() => store.produkStore.getProduk); // Menggunakan computed untuk memastikan reaktivitas
-
+  const produkStore = computed(() => store.produkStore.getProduk); 
 watch(produkStore, (newProduk, oldProduk) => {
-  // Lakukan aksi atau perubahan yang diperlukan saat produk berubah
+  
   produk.value = newProduk
 });
-console.log(produk)
+
 
   
 

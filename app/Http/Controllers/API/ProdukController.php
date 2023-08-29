@@ -44,7 +44,7 @@ class ProdukController extends Controller
     public function showByMitra(string $mitra_id)
     {
 
-        $data = Produk::where('mitra_id', $mitra_id)->get();
+        $data = Produk::where('mitra_id', $mitra_id)->orderBy('id','desc')->get();
         return response()->json($data);
 
     }

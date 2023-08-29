@@ -139,9 +139,11 @@
          form.transform(data => ({
             forceFormData: true,
             ...data,
-            })).post(route('mitra_produk.store'), {
+            }))
+        form.post(route('mitra_produk.store'), {
           onFinish: () => {
                 toggleDialog();
+                store.produkStore.fetchProduk(MitraId)
                 alert('data produk berhasil di tambah')
               
            },
