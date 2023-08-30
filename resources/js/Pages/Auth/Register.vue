@@ -99,16 +99,35 @@
           @input="v$.nama_usaha.$touch"
           @blur="v$.nama_usaha.$touch"
         ></v-text-field>
-
+        
+       
         <v-text-field
           v-model="state.alamat_usaha"
           :error-messages="v$.alamat_usaha.$errors.map(e => e.$message)"
           label="Alamat usaha"
           prepend-inner-icon="mdi-office-building-marker-outline"
           required
+    
           @input="v$.alamat_usaha.$touch"
           @blur="v$.alamat_usaha.$touch"
         ></v-text-field>
+
+        <v-select
+        clearable
+        v-model="state.kecamatan"
+        :error-messages="v$.kecamatan.$errors.map(e => e.$message)"
+        label="Kecamatan"
+        :items="getListKecamatan"
+        item-title="name"
+        item-value="name"
+        prepend-inner-icon="mdi-sign-real-estate"
+        required
+        @input="v$.kecamatan.$touch"
+        @blur="v$.kecamatan.$touch"
+          ></v-select>
+     
+
+
         <v-text-field
         v-model="state.no_hp"
         :error-messages="v$.no_hp.$errors.map(e => e.$message)"
@@ -232,16 +251,20 @@
   </template>
   <script setup>
   import { Head, Link,useForm } from '@inertiajs/vue3';
-  import { ref, computed,reactive } from 'vue';
+  import { ref, computed,reactive,inject} from 'vue';
   import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
   import AuthenticationCard from '@/Components/AuthenticationCard.vue';
   import { useVuelidate } from '@vuelidate/core';
   import { email, required, integer, helpers, minLength,sameAs } from '@vuelidate/validators';
-import axios from 'axios';
-import { onMounted } from 'vue';
+  import axios from 'axios';
+  import { onMounted } from 'vue';
+  import { storeToRefs } from 'pinia';
   
   const requiredMessage = () => ({ required: helpers.withMessage('Kolom ini Wajib Di Isi', required) });
+  const store = inject('store')
 
+  const { getListKecamatan } = storeToRefs(store.kecamatanStore)
+  store.kecamatanStore.fetchKecamatan();
   const step = ref(1);
   const programList = ref([]);
   const items = ref(['Data Diri', 'Data Usaha','Detail Usaha']);
@@ -267,6 +290,7 @@ import { onMounted } from 'vue';
     no_npwp:'',
     no_ijin_usaha: '',
     jumlah_tenaga_kerja: '',
+    kecamatan:''
   });
 
   const passwordConfirm = computed(() => state.password);
@@ -300,7 +324,8 @@ import { onMounted } from 'vue';
     bidang_usaha:{...requiredMessage()},
     no_npwp: { ...requiredMessage() },
     no_ijin_usaha:{...requiredMessage()},
-    jumlah_tenaga_kerja:{...requiredMessage()}
+    jumlah_tenaga_kerja:{...requiredMessage()},
+    kecamatan:{...requiredMessage()},
   };
   
   const v$ = useVuelidate(rules, state);
@@ -330,6 +355,7 @@ import { onMounted } from 'vue';
 
       v$?.value.nama_usaha?.$touch?.();
       v$?.value.alamat_usaha?.$touch?.();
+      v$?.value.kecamatan?.$touch?.();
       v$?.value.no_hp?.$touch?.();
       v$?.value.jenis_usaha?.$touch?.();
 

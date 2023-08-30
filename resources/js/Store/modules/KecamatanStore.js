@@ -1,9 +1,6 @@
-
 // src/store/modules/overlay.js
 import axios from 'axios';
 import { defineStore } from 'pinia'
-
-
 
 export const useKecamatanStore = defineStore('kecamatanStore', {
   state: () => ({
@@ -11,24 +8,27 @@ export const useKecamatanStore = defineStore('kecamatanStore', {
   }),
   actions: {
     async fetchKecamatan() {
-        const endpoint = window.location.origin;
+      const apiKey = '415cc2b6174d7b09feeb6315f0456495'; // Ganti dengan API Key yang sesuai
+      const endpoint = window.location.origin; // Ganti dengan URL endpoint yang sesuai
 
-        try {
-            this.listKecamatan = await fetch(endpoint+'/api/kecamatan')
-            .then((response) => response.json())
-
-          } catch (error) {
-            console.log(error)
-          } finally {
-            console.log('done')
-          }
-        // console.log(response.data)
-        // this.listKecamatan = response.data
+      try {
+        const response = await axios.get(endpoint+'/api/kecamatan', {
+          headers: {
+            'X-API-Public-Key': apiKey,
+          },
+        });
+        
+        this.listKecamatan = response.data;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        console.log('done');
+      }
     }
   },
   getters: {
     getListKecamatan(state) {
-        return state.listKecamatan // Menggunakan storeToRef di sini
-      }
+      return state.listKecamatan;
+    }
   }
-})
+});

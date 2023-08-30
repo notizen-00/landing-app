@@ -11,9 +11,15 @@
       </v-app-bar>
 
    
-      <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
-        <slot></slot>
+      <v-main class="d-flex flex-column align-center justify-center">
+        <div class="w-full">
+          <slot name="carousel"></slot>
+        </div>
         
+        <v-container class="bg-slate-200" fluid>
+            <slot name="content"></slot>
+        </v-container>
+   
       </v-main>
       
         <Footer/>

@@ -1,8 +1,8 @@
 <template>
     <SiteLayout>
-
+    <template  #carousel>
       <template v-if="mobile">
-        <v-carousel :show-arrows="false" show-delimiters height="200">
+        <v-carousel :show-arrows="false" show-delimiters height="200" width="100%">
           <v-carousel-item src="/img/kotabaru.png" cover height="250"></v-carousel-item>
           <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover height="250"></v-carousel-item>
           <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover height="250"></v-carousel-item>
@@ -52,31 +52,68 @@
         </v-container>
       </v-form>
 
-      <v-form class="d-flex d-sm-none absolute flex top-12 w-10/12 h-14 justify-center mt-9 rounded-full bg-white">
+      <v-form class="d-flex d-sm-none absolute flex top-12 w-10/12 h-12 ml-10 justify-center mt-5 rounded-full bg-white">
         <v-container class="absolute" fluid>
           <v-row>
-            <v-col cols="6" sm="6"> 
-               <select class="border border-blue-500 w-full -mt-10 rounded-xl h-8 text-xs appearance-none" >
+            <v-col cols="3" sm="8" class="-mt-3"> 
+              <v-menu>
+                <template v-slot:activator="{ props }">
+                  <v-btn icon="mdi-filter" size="x-small" class="mt-1" color="blue" v-bind="props"></v-btn>
+                </template>
+    
+                <v-list>
+                  <v-list-item @click="store.siteStore.setFilter('kecamatan')">
+                    <v-list-item-title>Kecamatan</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item @click="store.siteStore.setFilter('program')">
+                    <v-list-item-title>Program</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+               
+            </v-col>
+  
+            <v-col cols="9" class="-mt-2 -m-5">
+              <select  v-if="getSelectedFilter === 'program'" class="border border-blue-500 w-full rounded-xl h-8 text-xs" >
+                <option value="">Program</option>
+               </select>
+
+                <select clearable v-if="getSelectedFilter === 'kecamatan'" class="border border-blue-500 w-full rounded-xl h-8 text-xs appearance-none" >
+                <option value="">Kecamatan</option>
                 <option v-for="option in listKecamatan" v-bind:value="option.id">
                   {{ option.name }}
                 </option>
-               </select>
-            </v-col>
-  
-            <v-col cols="6" sm="6">
-              <select class="border border-blue-500 w-full -mt-10 rounded-xl h-8 text-xs" >
-                <option value="">Program</option>
+
+                Filter
                </select>
             </v-col>
           </v-row>
         </v-container>
+        
       </v-form>
+    </template>
 
+    <template #content>
+        <SectionTitle title="Informasi Website"/>
+
+        <SectionOneMobile v-if="mobile" />
+
+        <AboutSection v-if="mobile" class="mt-4" />
+
+        <SectionTitle title="List Mitra" class="mt-4"/>
+        <MitraSection v-if="mobile" class="mt-4" />
+
+        <SectionTitle title="Best Seller" class="mt-4"/>
+    </template>
 
     </SiteLayout>
   </template>
   <script setup>
   import SiteLayout from "@/Layouts/SiteLayout.vue";
+  import SectionOneMobile from '@/Components/Site/Mobile/SectionOnes.vue'
+  import SectionTitle from '@/Components/SectionTitle.vue'
+  import AboutSection from '@/Components/Site/Mobile/AboutSection.vue'
+  import MitraSection from '@/Components/Site/Mobile/MitraSection.vue'
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
   import { useDisplay } from "vuetify";
@@ -85,8 +122,10 @@
   const store = inject('store')
 
   const { listKecamatan } = storeToRefs(store.kecamatanStore)
-
+  const { getSelectedFilter} = storeToRefs(store.siteStore)
+ 
   store.kecamatanStore.fetchKecamatan()
+  store.siteStore.fetchMitra()
 
 
   const show1 = ref(false);

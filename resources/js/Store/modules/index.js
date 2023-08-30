@@ -5,6 +5,7 @@ import { useNavigationStateStore } from './NavigationState'
 import { useProdukStore } from './ProdukStore'
 import { useMitraStore } from './MitraStore'
 import { useKecamatanStore } from './KecamatanStore'
+import { useSiteStore } from './SiteStore'
 // Impor modul-modul lain jika ada
 
 export function useStore() {
@@ -15,6 +16,7 @@ export function useStore() {
     produkStore: useProdukStore(),
     mitraStore: useMitraStore(),
     kecamatanStore: useKecamatanStore(),
+    siteStore: useSiteStore(),
     // Masukkan modul-modul lain di sini jika ada
   }
 }

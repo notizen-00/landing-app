@@ -38,7 +38,7 @@ class MitraController extends Controller
                 'program_id'=>$request->jenis_usaha,
                 'nama_usaha'=>$request->nama_usaha,
                 'deskripsi_usaha'=>'',
-                'nama_kecamatan'=>'test',
+                'nama_kecamatan'=>$request->kecamatan,
                 'alamat_usaha'=>$request->alamat_usaha,
                 'no_ijin_usaha'=>$request->no_ijin_usaha,
                 'npwp_usaha'=>$request->no_npwp,
@@ -70,7 +70,25 @@ class MitraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'nama_program'=>'required',
+            'deskripsi_program'=>'nullable',
+    ]);
+    $data = $validator + [
+            'status_program' => 1,
+        ];
+
+    $program = Program::create($data);
+    
+    if($program)
+    {
+        return redirect()->route('admin_program.index')->with('success', 'Data berhasil ditambahkan.');
+
+    }else{
+
+        return redirect()->route('admin_program.index')->with('error', 'Data Gagal ditambahkan.');
+
+    }
     }
 
     /**

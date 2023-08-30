@@ -18,6 +18,13 @@ class MitraController extends Controller
         return response()->json($data);
     }
 
+    public function getMitra(){
+        
+        $data = Mitra::with('users')->with('program')->get();
+
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

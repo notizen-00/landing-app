@@ -23,14 +23,17 @@ Route::get('/', function () {
     return Inertia::render('Site/Index');
 });
 
-Route::middleware('check_api_origin')->group(function () {
+Route::middleware('verify_api_key')->group(function () {
     $api_path = 'App\Http\Controllers\Api';
-Route::get('api/kecamatan',$api_path.'\RestController@get_kecamatan');
+    Route::get('api/kecamatan',$api_path.'\RestController@get_kecamatan');
+    Route::get('api/public/mitra',$api_path.'\MitraController@getMitra');
 });
 
 
 Route::post('/register_mitra','App\Http\Controllers\MitraController@register')->name('register_mitra');
 Route::get('/api/public/program','App\Http\Controllers\Api\ProgramController@index')->name('public_api.program');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -57,6 +60,7 @@ Route::middleware([
         Route::resource('admin-app/admin_mitra',$admin_path.'\MitraController');
         Route::resource('admin-app/admin_blog',$admin_path.'\BlogController');
         Route::resource('admin-app/admin_pengaturan',$admin_path.'\PengaturanController');
+        Route::get('/generate-api-key', $admin_path.'\ApiKeyController@generateApiKey');
 
     });
 
