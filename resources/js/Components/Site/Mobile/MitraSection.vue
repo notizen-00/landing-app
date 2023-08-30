@@ -52,17 +52,21 @@
                   </template>
                 {{ value.nama_kecamatan }}
               </v-chip><br>
-              <v-chip size="small" variant="text" prepend-icon="mdi-map-marker" class="text-slate-300" color="danger">
+             
+
+    
+            </v-card-subtitle>
+          </v-card-item>
+          <div class="text-subtitle-3 ml-3 -mb-1 -mt-5">
+             <v-chip size="small" variant="text" prepend-icon="mdi-map-marker" class="text-slate-300" color="danger">
                 <template v-slot:prepend>
                     <v-icon color="success"></v-icon>
                   </template>
                 {{ value.alamat_usaha }}
               </v-chip>
-
-    
-            </v-card-subtitle>
-          </v-card-item>
+          </div>
             <v-card-text class="text-start text-slate-600 line-clamp-1">
+               
                 {{ value.deskripsi_usaha }}
                 
              </v-card-text>

@@ -103,7 +103,9 @@
         <SectionTitle title="List Mitra" class="mt-4"/>
         <MitraSection v-if="mobile" class="mt-4" />
 
-        <SectionTitle title="Best Seller" class="mt-4"/>
+        <SectionTitle title="Gallery" class="mt-4"/>
+        <GallerySection v-if="mobile" class="mt-4"/>
+
     </template>
 
     </SiteLayout>
@@ -114,6 +116,7 @@
   import SectionTitle from '@/Components/SectionTitle.vue'
   import AboutSection from '@/Components/Site/Mobile/AboutSection.vue'
   import MitraSection from '@/Components/Site/Mobile/MitraSection.vue'
+  import GallerySection from '@/Components/Site/Mobile/GallerySection.vue'
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
   import { useDisplay } from "vuetify";
