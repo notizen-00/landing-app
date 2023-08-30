@@ -23,6 +23,12 @@ Route::get('/', function () {
     return Inertia::render('Site/Index');
 });
 
+Route::middleware('check_api_origin')->group(function () {
+    $api_path = 'App\Http\Controllers\Api';
+Route::get('api/kecamatan',$api_path.'\RestController@get_kecamatan');
+});
+
+
 Route::post('/register_mitra','App\Http\Controllers\MitraController@register')->name('register_mitra');
 Route::get('/api/public/program','App\Http\Controllers\Api\ProgramController@index')->name('public_api.program');
 Route::middleware([
@@ -36,8 +42,10 @@ Route::middleware([
     Route::resource('api/program',$api_path.'\ProgramController');
     Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController@verifikasi');
     Route::resource('api/mitra',$api_path.'\MitraController');
+  
     Route::get('api/produk/mitra/{id}',$api_path.'\ProdukController@showByMitra')->name('api_produk.bymitra');
     Route::resource('api/produk',$api_path.'\ProdukController');
+    
     // Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController');
     Route::middleware(['checkRole:1'])->group(function () {
         $admin_path = 'App\Http\Controllers\Admin';

@@ -1,6 +1,6 @@
 <template>
     <div class="d-none d-sm-flex w-full">
-      <v-btn class="mr-auto justify-start">ICON</v-btn>
+      <v-btn class="mr-auto justify-start"><v-avatar src="/img/logo.png" color="blue" ></v-avatar></v-btn>
   
       <div class="">
         <v-btn class="hover:divide-x-4" variant="plain">

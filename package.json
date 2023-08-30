@@ -5,14 +5,12 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^39.0.1",
-    "@ckeditor/ckeditor5-font": "^39.0.1",
-    "@ckeditor/ckeditor5-vue": "^5.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.3",
+    "@vueup/vue-quill": "^1.2.0",
     "cli": "^1.0.1",
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",

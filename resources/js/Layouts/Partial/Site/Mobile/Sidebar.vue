@@ -1,7 +1,7 @@
 <template>
     <v-list>
         <v-list-item
-          prepend-avatar="https://esportsku.com/tech/wp-content/uploads/2021/10/unnamed-16.png"
+          prepend-avatar="/img/logo.png"
           title="Landing-App"
           subtitle="Masuk / Daftar"
         >
