@@ -79,6 +79,7 @@ Route::middleware([
 
         Route::resource('mitra-app/mitra_toko','App\Http\Controllers\Mitra\TokoController');
         Route::resource('mitra-app/mitra_produk','App\Http\Controllers\Mitra\ProdukController');
+        Route::resource('mitra-app/mitra_account','App\Http\Controllers\Mitra\AccountController');
 
     });
 

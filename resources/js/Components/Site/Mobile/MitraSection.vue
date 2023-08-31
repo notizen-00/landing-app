@@ -67,7 +67,7 @@
           </div>
             <v-card-text class="text-start text-slate-600 line-clamp-1">
                
-                {{ value.deskripsi_usaha }}
+                {{ value.deskripsi_usaha ? value.deskripsi_usaha : 'Mitra Belum Mengupdate deskripsi ...' }}
                 
              </v-card-text>
              <v-card-action class="d-flex justify-center absolute bottom-2 left-1/4">

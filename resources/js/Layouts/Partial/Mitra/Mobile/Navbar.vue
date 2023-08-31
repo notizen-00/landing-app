@@ -9,7 +9,7 @@
      
 
        <div class="items-center my-auto w-1/2 justify-center">
-        <h6 class="text-center ">Dashboard</h6>
+        <h6 class="text-center ">{{ getTopBar }}</h6>
         </div> 
       <!-- <div class="justify-end w-1/4"> -->
         <v-btn class="text-none w-1/4" @click="ToggleNotif" color="dark" stacked>
@@ -23,9 +23,13 @@
   
   <script setup>
   import { inject, computed, ref } from 'vue';
+  import {storeToRefs} from 'pinia'
   import { Link,router } from '@inertiajs/vue3';
 
   const store = inject('store')
+
+  const { getTopBar } = storeToRefs(store.mitraStore)
+
   const ToggleNotif = () =>{
   store.overlay.toggleOverlay();
  }

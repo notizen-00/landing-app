@@ -17,6 +17,7 @@ const form = useForm({
     _method: 'PUT',
     name: props.user.name,
     email: props.user.email,
+    no_hp:props.user.no_hp,
     photo: null,
 });
 
@@ -78,11 +79,11 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Informasi Profil
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Perbarui data diri dengan benar di sini 
         </template>
 
         <template #form>
@@ -173,6 +174,18 @@ const clearPhotoFileInput = () => {
                         A new verification link has been sent to your email address.
                     </div>
                 </div>
+            </div>
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="no_hp" value="Nomor Telepon" />
+                <TextInput
+                    id="no_hp"
+                    v-model="form.no_hp"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="no_hp"
+                />
+                <InputError :message="form.errors.no_hp" class="mt-2" />
             </div>
         </template>
 

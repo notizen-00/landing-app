@@ -6,6 +6,7 @@ import { useProdukStore } from './ProdukStore'
 import { useMitraStore } from './MitraStore'
 import { useKecamatanStore } from './KecamatanStore'
 import { useSiteStore } from './SiteStore'
+import { useTokoStore } from './TokoStore'
 // Impor modul-modul lain jika ada
 
 export function useStore() {
@@ -17,6 +18,7 @@ export function useStore() {
     mitraStore: useMitraStore(),
     kecamatanStore: useKecamatanStore(),
     siteStore: useSiteStore(),
+    tokoStore: useTokoStore(),
     // Masukkan modul-modul lain di sini jika ada
   }
 }
