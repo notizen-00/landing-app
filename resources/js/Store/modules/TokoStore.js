@@ -27,6 +27,7 @@ export const useTokoStore = defineStore('tokoStore', {
       getDetailMitra: (state) => state.detailMitra,
       getDialog:(state)=> state.dialog
       
-    }
+    },
+    persist:'sessionStorage'
 
   })

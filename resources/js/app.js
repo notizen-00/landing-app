@@ -15,8 +15,7 @@ import { VBottomSheet } from 'vuetify/labs/VBottomSheet'
 import '@mdi/font/css/materialdesignicons.css'
 import { pinia } from './Store/pinia'
 import { useStore } from '@/Store/modules'
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 const vuetify = createVuetify({
     components: {
         ...components,
@@ -43,7 +42,6 @@ createInertiaApp({
             .use(ZiggyVue)
             .use(vuetify)
             .use(pinia)
-            .component('QuillEditor', QuillEditor)
             .provide('store', useStore())
             .mount(el);
     },
