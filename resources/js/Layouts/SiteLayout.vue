@@ -11,8 +11,8 @@
       </v-app-bar>
 
    
-      <v-main class="d-flex flex-column align-center justify-center">
-        <div class="w-full">
+      <v-main class="d-flex flex-column align-center bg-slate-200 justify-center">
+        <div :class="mobile ? 'w-full bg-slate-400' : 'w-3/4 bg-slate-400' ">
           <slot name="carousel"></slot>
         </div>
         
@@ -28,17 +28,20 @@
   </template>
 
   <script>
-  import { useLayout } from 'vuetify'
+  import { useLayout,useDisplay } from 'vuetify'
   import { inject, computed } from 'vue'
   import Footer from '@/Layouts/Partial/Site/Footer.vue'
   import NavbarSite from '@/Layouts/Partial/Site/Navbar.vue'
   import SidebarSite from '@/Layouts/Partial/Site/Mobile/Sidebar.vue'
+ 
+
+
   
   export default {
     components: { Footer, NavbarSite ,SidebarSite },
     setup() {
       const store = inject('store')
-  
+      const { width, mobile } = useDisplay()
       const toggleOverlay = () => {
         store.overlay.toggleOverlay()
       }
@@ -50,6 +53,7 @@
       return {
         isOverlayActive,
         toggleOverlay,
+        mobile
     
       }
     },

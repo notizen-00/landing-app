@@ -6,24 +6,31 @@ export const useSiteStore = defineStore('siteStore', {
       selectedFilter: 'kecamatan',
       listMitra:[],
       searchQuery: '',
+      detailMitra:[],
+      mitraId:0
     }),
     actions: {
       setFilter(filter) {
         this.selectedFilter = filter;
       },
+      setMitraId(value){
+          this.mitraId = value;
+      },
       async fetchMitra(){
 
           const response = await api_helper.get('/api/public/mitra');
           this.listMitra = response.data || []
+      },
+      async fetchDetailMitra(id){
+  
+          const response = await api_helper.get('/api/public/mitra/'+id);
+          this.detailMitra = response.data || []
+        
       }
     },
     getters: {
       getSelectedFilter: (state) => state.selectedFilter,
       getListMitra: (state) => state.listMitra,
-      getFilteredMitra(state){
-
-      
-        // return this.listMitra.filter(mitra => mitra.nama_usaha.toLowerCase().includes(searchTerm));
-      },
+      getDetailMitra:(state) => state.detailMitra
     }
   })

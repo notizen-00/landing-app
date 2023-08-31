@@ -96,7 +96,11 @@ class MitraController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Mitra::with('users')->with('program')->where('id',$id)->first();
+    
+        return Inertia::render('Site/DetailMitra',[
+            'data_mitra'=>$data,
+        ]);
     }
 
     /**

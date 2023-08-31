@@ -11,8 +11,8 @@
       </template>
       <template v-else>
        
-        <v-carousel show-arrows="hover" hide-delimiters class="relative">
-          <v-carousel-item src="/img/kotabaru1.webp" cover></v-carousel-item>
+        <v-carousel show-arrows="hover" hide-delimiters rounded="xl" class="relative">
+          <v-carousel-item src="/img/kotabaru1.webp" cover ></v-carousel-item>
           <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
           <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
       </v-carousel>
@@ -93,19 +93,22 @@
       </v-form>
     </template>
 
-    <template #content>
+    <template #content v-if="mobile">
         <SectionTitle title="Informasi Website"/>
 
-        <SectionOneMobile v-if="mobile" />
+        <SectionOneMobile />
 
-        <AboutSection v-if="mobile" class="mt-4" />
+        <AboutSection  class="mt-4" />
 
         <SectionTitle title="List Mitra" class="mt-4"/>
-        <MitraSection v-if="mobile" class="mt-4" />
+        <MitraSection class="mt-4" />
 
         <SectionTitle title="Gallery" class="mt-4"/>
-        <GallerySection v-if="mobile" class="mt-4"/>
+        <GallerySection class="mt-4"/>
 
+    </template>
+    <template #content v-else>
+        
     </template>
 
     </SiteLayout>

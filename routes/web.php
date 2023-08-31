@@ -23,10 +23,14 @@ Route::get('/', function () {
     return Inertia::render('Site/Index');
 });
 
+Route::get('site/mitra/{id}','App\Http\Controllers\MitraController@show')->name('site_mitra.show');
+
 Route::middleware('verify_api_key')->group(function () {
     $api_path = 'App\Http\Controllers\Api';
     Route::get('api/kecamatan',$api_path.'\RestController@get_kecamatan');
     Route::get('api/public/mitra',$api_path.'\MitraController@getMitra');
+    Route::get('api/public/mitra/{id}',$api_path.'\MitraController@show');
+    
 });
 
 

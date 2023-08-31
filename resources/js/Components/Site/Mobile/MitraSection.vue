@@ -70,19 +70,19 @@
                 {{ value.deskripsi_usaha ? value.deskripsi_usaha : 'Mitra Belum Mengupdate deskripsi ...' }}
                 
              </v-card-text>
-             <v-card-action class="d-flex justify-center absolute bottom-2 left-1/4">
+             <v-card-actions class="d-flex justify-center absolute bottom-2 left-1/4">
                 <v-btn
                 variant="tonal"
                 class="text-white"
                 v-if="isSelected"
                 append-icon="mdi-eye"
-                @click.prevent="onAlert(value.id)"
+                @click.prevent="routeDetail(value.id)"
                 color="warning"
               >
                 Lihat Detail
               </v-btn>  
 
-             </v-card-action>
+             </v-card-actions>
             
           </v-card>
         </v-slide-group-item>
@@ -107,6 +107,7 @@
     
     import { storeToRefs } from 'pinia';
     import { ref,inject,computed } from 'vue'
+    import { router } from '@inertiajs/vue3'
     const model = ref(null)
     const store = inject('store')
     const search = ref('')
@@ -119,8 +120,9 @@
     )
     );
 
-    const onAlert = (id) =>{
-        alert(id)
+    const routeDetail = (id) =>{
+        store.siteStore.fetchDetailMitra(id)
+        router.get('site/mitra/'+id)
     }
 
     
