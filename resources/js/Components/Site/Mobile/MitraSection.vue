@@ -122,6 +122,7 @@
 
     const routeDetail = (id) =>{
         store.siteStore.fetchDetailMitra(id)
+        
         router.get('site/mitra/'+id)
     }
 

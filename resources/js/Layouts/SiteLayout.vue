@@ -6,13 +6,12 @@
        <sidebar-site/>
       </v-navigation-drawer>
 
-      <v-app-bar color="grey-lighten-4" name="app-bar">
+      <v-app-bar color="grey-lighten-4" name="app-bar" elevation="0">
             <navbar-site/>
       </v-app-bar>
-
-   
+      
       <v-main class="d-flex flex-column align-center bg-slate-200 justify-center">
-        <div :class="mobile ? 'w-full bg-slate-400' : 'w-3/4 bg-slate-400' ">
+        <div :class="mobile ? 'w-full bg-grey-4' : 'w-3/4 bg-slate-400' ">
           <slot name="carousel"></slot>
         </div>
         
