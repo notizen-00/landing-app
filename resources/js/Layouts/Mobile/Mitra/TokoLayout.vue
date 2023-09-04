@@ -8,7 +8,7 @@
           </v-row>
           <v-row>
             <v-col col="12" class="relative">
-            <CardProduct/>
+            <CardProduct />
             </v-col>
           </v-row>
 
@@ -28,5 +28,8 @@
         import { inject,ref } from 'vue'
 
         const store = inject('store')
+
+
+     
 
     </script>

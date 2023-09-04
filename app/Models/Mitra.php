@@ -28,6 +28,10 @@ class Mitra extends Model
         return $this->hasOne(User::class,'id','user_id');
     }
 
+    public function produk(){
+        return $this->hasMany(Produk::class,'mitra_id','id');
+    }
+
     public function program(){
         return $this->hasOne(Program::class,'id','program_id');
     }

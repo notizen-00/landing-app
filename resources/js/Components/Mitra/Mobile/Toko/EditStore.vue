@@ -66,6 +66,19 @@
                  prepend-inner-icon="mdi-note-edit-outline"
                  variant="solo"
                 ></v-text-field>
+
+                <v-text-field
+                clearable
+                v-model="form.jumlah_karyawan"
+                type="number" 
+                required
+                rounded="xl"
+                label="Jumlah Tenaga Kerja"
+                class="mt-1"
+                color="info"
+                 prepend-inner-icon="mdi-account-group"
+                 variant="solo"
+                ></v-text-field>
   
 
                 <v-text-field
@@ -82,7 +95,7 @@
                 ></v-text-field>
 
                 <v-select
-                v-model="form.kecamatan"
+                v-model="form.nama_kecamatan"
                 clearable=""
                 prepend-inner-icon="mdi-sign-real-estate"
                 class="no-text-transform "
@@ -90,7 +103,7 @@
                 :items="getListKecamatan"
                 item-title="name"
                 item-value="name"
-                :value="form.kecamatan"
+                :value="form.nama_kecamatan"
                 density="default"
                 rounded="xl"
                 label="kecamatan"
@@ -111,11 +124,10 @@
   
                 <v-text-field
                 clearable
-                @input="form.foto_produk = $event.target.files[0]"
+                @input="form.foto_usaha = $event.target.files[0]"
                 rounded="xl"
                 type="file"
-                required
-                label="Foto Produk"
+                label="Foto Usaha"
                 class="mt-1"
                 color="info"
                  prepend-inner-icon="mdi-upload"
@@ -172,27 +184,28 @@ import { storeToRefs } from 'pinia';
         no_ijin_usaha:getDetailMitra.value ? getDetailMitra.value.no_ijin_usaha : '',
         npwp_usaha:getDetailMitra.value ? getDetailMitra.value.npwp_usaha : '',
         alamat_usaha:getDetailMitra.value ? getDetailMitra.value.alamat_usaha : '',
-        kecamatan:getDetailMitra.value ? getDetailMitra.value.nama_kecamatan : '',
+        nama_kecamatan:getDetailMitra.value ? getDetailMitra.value.nama_kecamatan : '',
+        jumlah_karyawan:getDetailMitra.value ? getDetailMitra.value.jumlah_karyawan : '',
         deskripsi_usaha:getDetailMitra.value ? getDetailMitra.value.deskripsi_usaha : '',
         foto_usaha:'',
         mitra_id:MitraId
     });
-   
+    
 
     const submit = () =>{
 
   
 
          form.transform(data => ({
+            _method: 'put',
             forceFormData: true,
             ...data,
             }))
         form.post(route('mitra_toko.update',{id:MitraId}), {
           onFinish: () => {
-            
-                
-                alert('data produk berhasil di tambah')
-              
+            alert('mitra berhasil di update');
+                store.tokoStore.fetchDetailMitra();
+                store.tokoStore.toggleDialog();
            },
         })
 

@@ -43,6 +43,15 @@ class MitraController extends Controller
         return response()->json($data);
     }
 
+    public function showProduk(string $id)
+    {
+
+        $data = Mitra::with('produk')->where('id',$id)->get();
+
+       return response()->json($data);
+
+    }
+
     /**
      * Update the specified resource in storage.
      */

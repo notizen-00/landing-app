@@ -44,10 +44,10 @@
                     </v-timeline-item>
                   </v-timeline>
               </v-card-item>
-        <v-card-text class="d-flex justify-center text-start text-slate-500">
+        <v-card-text class="d-flex justify-center text-center text-slate-500">
     
-            <div>
-              {{ getDetailMitra.deskripsi_usaha }}
+            <div class="p-4 italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote">
+              " {{ getDetailMitra.deskripsi_usaha }} "
             </div>
           </v-card-text>
       
@@ -57,6 +57,9 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        
+        <ListProduk />
+        
     </template>
     <template #content v-else >
 
@@ -66,6 +69,7 @@
   <script setup>
   import SiteLayout from "@/Layouts/SiteLayout.vue";
   import HeaderDetailMobile from '@/Components/Site/Mobile/Partial/DetailMitraHeader.vue'
+  import ListProduk from '@/Components/Site/Mobile/Partial/ListProdukMitra.vue'
 
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
@@ -75,6 +79,7 @@
   const store = inject('store')
 
   const { getDetailMitra } = storeToRefs(store.siteStore)
+
 
   const items = [
         {

@@ -87,20 +87,7 @@
           </v-card>
         </v-slide-group-item>
       </v-slide-group>
-      <!-- <v-expand-transition color="yellow-lighten-5">
-        <v-sheet
-          v-if="model != null"
-          height="100"
-          rounded="xl"
-        >
-          <div class="d-flex fill-height align-center justify-center">
-            <h3 class="text-h6">
-        
-              <v-btn append-icon="mdi-eye" @click="showMitraDetail(model)" color="warning">Lihat Detail</v-btn>
-            </h3>
-          </div>
-        </v-sheet>
-      </v-expand-transition> -->
+  
     </v-sheet>
   </template>
   <script setup>
@@ -122,7 +109,7 @@
 
     const routeDetail = (id) =>{
         store.siteStore.fetchDetailMitra(id)
-        
+        store.produkSiteStore.fetchProduk(id)
         router.get('site/mitra/'+id)
     }
 

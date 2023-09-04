@@ -61,7 +61,7 @@ export default {
     const store = inject('store')
 
     const toggleOverlay = () => {
-      router.get('login');
+      router.get('/login');
     }
   
     const items = [

@@ -1,8 +1,8 @@
 // src/store/modules/overlay.js
 import axios from 'axios'
 import { defineStore } from 'pinia'
-
-export const useProdukStore = defineStore('produkStore', {
+import { api_helper } from '@/Service/FetchHelper'
+export const useProdukSiteStore = defineStore('produkSiteStore', {
 
   state: () => ({
     produk: null,
@@ -14,7 +14,8 @@ export const useProdukStore = defineStore('produkStore', {
     async fetchProduk(MitraId){
         try{
             const url = window.location.origin;
-            const response = await axios.get(url+'/api/produk/mitra/'+MitraId);
+            const response = await api_helper.get(url+'/api/public/produk/mitra/'+MitraId);
+           
             this.produk = response.data;
 
         }catch(error){
@@ -45,5 +46,6 @@ export const useProdukStore = defineStore('produkStore', {
           return state.produk ? state.produk.length : 0;
         },
   
-  }
+  },
+  persist:true
 })

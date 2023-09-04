@@ -39,7 +39,7 @@
               <v-card class="elevation-2 rounded-xl relative bg-blue-lighten-4">
                 <img src="/img/product.png" class="h-full w-20 absolute -z-10 -left-11" alt="Card Image" />
                 <v-card-title class="text-h4">
-                  <h6 class="text-large text-center text-blue-800 font-bold">0</h6>
+                  <h6 class="text-large text-center text-blue-800 font-bold"> {{ getTotalProduk }} </h6>
                 </v-card-title>
                 <v-card-text class="text-center text-slate-800">
                   Produk Mitra
@@ -52,8 +52,8 @@
                 <v-card class="elevation-2 rounded-xl relative bg-blue-lighten-4">
                   <img src="/img/icons/account-group.png" class="h-full w-20 absolute -z-10 -left-11" alt="Card Image" />
                   <v-card-title class="text-h4">
-                    <h6 class="text-large text-center text-blue-800 font-bold">0</h6>
-                  </v-card-title>
+                    <h6 class="text-large text-center text-blue-800 font-bold"> {{ getDetailMitra.jumlah_karyawan }} </h6>
+                  </v-card-title> 
                   <v-card-text class="text-center text-slate-800">
                     Karyawan
                   </v-card-text>
@@ -87,8 +87,9 @@
                     </v-card-text>
                   </v-card>
                 </div>
+             
               </div>
-
+              <v-btn class="mt-2" variant="plain" @click="scrollToTarget" color="warning">Lihat Produk</v-btn>
               
   
         
@@ -99,26 +100,39 @@
 
         <div class="text-center h-50">
           <v-btn
-            variant="outlined"
-            color="blue"
-            prepend-icon="mdi-plus"
-            @click="store.tokoStore.toggleDialog()"
-            block>
-              Edit Toko
-          </v-btn>
+          variant="outlined"
+          color="blue"
+          prepend-icon="mdi-plus"
+          @click="ToggleDialogs"
+          block>
+            Tambah Product
+        </v-btn>
       </div>
 
         </v-sheet>
-        <div class="text-center h-50">
-          <v-btn
-            variant="outlined"
-            color="blue"
-            prepend-icon="mdi-plus"
-            @click="ToggleDialogs"
-            block>
-              Tambah Product
-          </v-btn>
+        <div class="text-center h-50 mt-4">
+          <v-sheet
+          class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4"
+          elevation="4"
+          height="300"
+          rounded
+          max-width="800"
+          width="100%"
+        >
+          <div>
+            <h2 class="text-h4 font-weight-black text-slate-500 mb-10">Deskripsi Mitra</h2>
+      
+            <blockquote class="p-4 italic border-l-4 bg-neutral-100 text-neutral-600 border-neutral-500 quote">
+             " {{ getDetailMitra.deskripsi_usaha }} "
+            </blockquote>
+      
+            <v-btn variant="text" color="orange">.....</v-btn>
+          </div>
+        </v-sheet>
+       
       </div>
+
+      
       <AddProduct/>
       <EditToko />
                 
@@ -135,8 +149,10 @@ import { storeToRefs } from 'pinia';
 const store = inject('store')
 const page = usePage();
 
-const status_mitra = page.props.status_mitra;
-const { getDetailMitra , getDialog} = storeToRefs(store.tokoStore)
+const status_mitra = page.props.status_mitra
+const { getDetailMitra , getDialog,getTargetProduk} = storeToRefs(store.tokoStore)
+const { getTotalProduk } = storeToRefs(store.produkStore)
+
 store.tokoStore.fetchDetailMitra();
 
     const ToggleDialogs = () =>{
@@ -147,6 +163,13 @@ store.tokoStore.fetchDetailMitra();
         alert('Menunggu verifikasi admin');
       }
     }
+ const scrollToTarget = () => {
+  
+  if (getTargetProduk) {
+    getTargetProduk.value.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 
 
 </script>

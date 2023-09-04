@@ -12,10 +12,16 @@
         <h6 class="text-center ">{{ getTopBar }}</h6>
         </div> 
       <!-- <div class="justify-end w-1/4"> -->
-        <v-btn class="text-none w-1/4" @click="ToggleNotif" color="dark" stacked>
+        <v-btn v-if="getTopBar != 'TOKO'" class="text-none w-1/4" @click="ToggleNotif" color="dark" stacked>
           <v-badge content="0" color="primary">
             <v-icon>mdi-bell-outline</v-icon>
           </v-badge>
+        </v-btn>
+
+        <v-btn v-if="getTopBar == 'TOKO'" class="text-none w-1/4" @click="store.tokoStore.toggleDialog()"  stacked>
+         
+            <v-icon color="primary">mdi-store-edit-outline</v-icon> 
+  
         </v-btn>
       <!-- </div> -->
     </div>
@@ -33,6 +39,7 @@
   const ToggleNotif = () =>{
   store.overlay.toggleOverlay();
  }
+
 
  const logout = () =>{
   router.post(route('logout'));

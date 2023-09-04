@@ -32,5 +32,6 @@ export const useSiteStore = defineStore('siteStore', {
       getSelectedFilter: (state) => state.selectedFilter,
       getListMitra: (state) => state.listMitra,
       getDetailMitra:(state) => state.detailMitra
-    }
+    },
+    persist:true
   })

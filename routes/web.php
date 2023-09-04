@@ -30,6 +30,7 @@ Route::middleware('verify_api_key')->group(function () {
     Route::get('api/kecamatan',$api_path.'\RestController@get_kecamatan');
     Route::get('api/public/mitra',$api_path.'\MitraController@getMitra');
     Route::get('api/public/mitra/{id}',$api_path.'\MitraController@show');
+    Route::get('api/public/produk/mitra/{id}',$api_path.'\MitraController@showProduk');
     
 });
 

@@ -6,7 +6,8 @@ export const useTokoStore = defineStore('tokoStore', {
     state: () => ({
       detailMitra:null,
       loading:false,
-      dialog:false
+      dialog:false,
+      target_produk:null,
 
     }),
     actions: {
@@ -21,9 +22,13 @@ export const useTokoStore = defineStore('tokoStore', {
       },
       toggleDialog(){
             return this.dialog = !this.dialog
+      },
+      setTargetProduk(target) {
+        return this.target_produk = target;
       }
     },
     getters: {
+      getTargetProduk:(state)=>state.target_produk,
       getDetailMitra: (state) => state.detailMitra,
       getDialog:(state)=> state.dialog
       

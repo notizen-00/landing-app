@@ -1,7 +1,8 @@
 <template>
 
+  <div class="" ref="target_produk">
 <v-carousel
-class="mt-3 rounded-t-xl"
+class="mt-3 mb-10 rounded-t-xl"
 show-arrows="hover"
 hide-delimiters
 progress="primary"
@@ -81,11 +82,12 @@ class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500
   <div>{{ product.deskripsi_produk }}</div>
 </v-card-text>
 
-<v-divider class="mx-4 mb-1"></v-divider>
+<v-divider class="mx-4 mb-10"></v-divider>
 </v-card>
 </v-carousel-item>
 </v-carousel>
 
+</div>
 
 
 
@@ -95,13 +97,23 @@ class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500
   <script setup>
   import { ref,inject,onMounted,computed,watch } from 'vue';
   import { usePage } from '@inertiajs/vue3'
+  import { storeToRefs } from 'pinia';
   const store = inject('store')
   const page = usePage()
+
+  const {getTargetProduk} = storeToRefs(store.tokoStore)
+  
+const target_produk = ref(null)
+
+
+ 
   const produk = ref([])
   onMounted( async()=>{
     const MitraId = page.props.mitra_id;
   
-   await store.produkStore.fetchProduk(MitraId)
+    await store.produkStore.fetchProduk(MitraId)
+    store.tokoStore.setTargetProduk(target_produk.value)
+    // console.log(target_produk.value)
 
   })
 

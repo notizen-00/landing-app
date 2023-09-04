@@ -37,7 +37,7 @@ class MitraController extends Controller
                 'no_mitra'=>Str::uuid(),
                 'program_id'=>$request->jenis_usaha,
                 'nama_usaha'=>$request->nama_usaha,
-                'deskripsi_usaha'=>'',
+                'jumlah_karyawan'=>$request->jumlah_tenaga_kerja, 
                 'nama_kecamatan'=>$request->kecamatan,
                 'alamat_usaha'=>$request->alamat_usaha,
                 'no_ijin_usaha'=>$request->no_ijin_usaha,
@@ -116,7 +116,7 @@ class MitraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+      
     }
 
     /**
