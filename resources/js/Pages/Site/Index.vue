@@ -11,10 +11,10 @@
       </template>
       <template v-else>
        
-        <v-carousel show-arrows="hover" hide-delimiters rounded="xl" class="relative">
-          <v-carousel-item src="/img/kotabaru1.webp" cover ></v-carousel-item>
-          <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
-          <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover></v-carousel-item>
+        <v-carousel show-arrows="hover" hide-delimiters rounded="xl" class="relative" >
+          <v-carousel-item src="/img/carousel1.jpg" class="mt-2" cover></v-carousel-item>
+          <v-carousel-item src="/img/carousel2.jpg" cover></v-carousel-item>
+          <v-carousel-item src="/img/carousel3.jpg" cover></v-carousel-item>
       </v-carousel>
 
       </template>
@@ -89,8 +89,53 @@
             </v-col>
           </v-row>
         </v-container>
-        
       </v-form>
+        <div class="d-none d-sm-flex  w-2/3 mx-auto" >
+          <v-card class="w-full absolute bottom-20 " style="border-top-left-radius:20px; border-bottom-left-radius:20px;" height="150" color="white">
+            <img src="/img/icons/account-group.png" class="h-full w-22 absolute -z-10 -left-16" alt="Card Image" />
+            <v-card-title class="text-blue-700 text-h2 text-center font-serif mt-8">
+              0
+            </v-card-title>
+            <v-card-subtitle class="text-center mt-4 font-bold font-serif"> 
+              Account Terdaftar
+            </v-card-subtitle>
+  
+          </v-card>
+          <v-card class="w-full absolute bottom-20 ml-1" height="150" color="white">
+            <img src="/img/product.png" class="h-full w-22 absolute -z-10 -left-16" alt="Card Image" />
+            <v-card-title class="text-blue-700 text-h2 text-center font-serif mt-8">
+              0
+            </v-card-title>
+            <v-card-subtitle class="text-center mt-4 font-bold font-serif"> 
+              Produk Mitra
+            </v-card-subtitle>
+  
+          </v-card>
+          <v-card class="w-full absolute bottom-20 ml-1" height="150" color="white">
+            <img src="/img/icons/state.png" class="h-full w-22 absolute -z-10 -left-16" alt="Card Image" />
+            <v-card-title class="text-blue-700 text-h2 text-center font-serif mt-8">
+              21
+            </v-card-title>
+            <v-card-subtitle class="text-center mt-4 font-bold font-serif"> 
+              Total Kecamatan
+            </v-card-subtitle>
+  
+          </v-card>
+          <v-card class="w-full absolute bottom-20 ml-1" style="border-top-right-radius:20px; border-bottom-right-radius:20px;" height="150" color="white">
+            <img src="/img/icons/store.jpg" class="h-full w-22 absolute -z-10 -left-16" alt="Card Image" />
+            <v-card-title class="text-blue-700 text-h2 text-center font-serif mt-8">
+              0
+            </v-card-title>
+            <v-card-subtitle class="text-center mt-4 font-bold font-serif"> 
+             Mitra Tervalidasi
+            </v-card-subtitle>
+  
+          </v-card>
+
+        </div>
+    
+
+    
     </template>
 
     <template #content v-if="mobile">
@@ -106,9 +151,19 @@
         <SectionTitle title="Gallery" class="mt-4"/>
         <GallerySection class="mt-4"/>
         <SectionTitle title="Berita" class="mt-4"/>
-        <BlogSection class="mt-4" />
+        <BlogSection  />
+        
     </template>
     <template #content v-else>
+
+     
+
+      <AboutSectionDesktops/>
+      <!-- <SectionTitle title="List Mitra" class="mt-10"/> -->
+      <MitraSectionDesktops class="mt-10"/>
+
+      <GallerySectionDesktops class="mt-10"/>
+
         
     </template>
 
@@ -122,6 +177,9 @@
   import MitraSection from '@/Components/Site/Mobile/MitraSection.vue'
   import GallerySection from '@/Components/Site/Mobile/GallerySection.vue'
   import BlogSection from '@/Components/Site/Mobile/BlogSection.vue'
+  import AboutSectionDesktops from '@/Components/Site/Desktop/AboutSections.vue'
+  import MitraSectionDesktops from '@/Components/Site/Desktop/MitraSection.vue'
+  import GallerySectionDesktops from "@/Components/Site/Desktop/GallerySection.vue";
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
   import { useDisplay } from "vuetify";

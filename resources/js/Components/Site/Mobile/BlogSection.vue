@@ -1,5 +1,6 @@
 <template>
-    <div class="" ref="target_blog">
+   
+
         <v-carousel
         v-if="ListBlogs.length > 0"
         class="mt-3 mb-10 rounded-t-xl"
@@ -9,55 +10,49 @@
         v-model="selection"
         >
         <v-carousel-item
-        v-for="(blog, index) in ListBlogs" :key="`card-${index}`" :value="index"
+        v-for="(blog, index) in ListBlogs ? ListBlogs : []" :key="`card-${index}`" :value="index"
         >
         
         <v-card
         :loading="loading"
         class="mx-auto h-full w-full rounded-t-xl border-t-xl border-2 border-yellow-500 relative z-10"
-        
         >
-        
-        <template v-slot:loader="{ isActive }">
-          <v-progress-linear
-            :active="isActive"
-            color="deep-purple"
-            height="4"
-            indeterminate
-          ></v-progress-linear>
-        </template>
-        <v-hover v-slot="{ isHovering, props }">
-        <v-img
-          cover
-          v-bind="props"
-          height="250"
-          class="m-5"
-          :src="'/storage/thumbnail/'+blog.foto_berita"
-        >
-        <v-overlay
-            :model-value="isHovering"
-            contained
-            scrim="white"
-            class="align-end bg-white justify-center"
-          >
-          
-            <v-btn variant="outlined" @click.prevent="lihatDetail(blog.id)" append-icon="mdi-account" color="success" class="mr-2">Lihat Detail</v-btn>
-           
-          </v-overlay>
-        </v-img>
-        </v-hover>
         
         <v-card-item>
-          <v-card-title>{{ blog.judul }}</v-card-title>
+          <v-img
+          cover
+          height="150"
+          class="m-5"
+          src="/img/thumbnail.avif"
+        >
+        </v-img>
+          <!-- <v-card-title class="w-full whitespace-normal"> -->
+            <div class="w-full mb-16 line-clamp-3">
+              <h1 class="text-h6"><b> {{ blog.judul }}</b></h1> 
+            </div>
+          <!-- </v-card-title> -->
         
-          <v-card-subtitle>
-            <span class="me-1">{{ blog.author }} Stok Tersedia</span>
+          <v-card-subtitle class="d-flex justify-between">
+            <div>
+              <span class="me-1">{{ blog.author }} </span>
         
-            <v-icon
-              color="error"
-              icon="mdi-fire-circle"
+              <v-icon
+                color="error"
+                icon="mdi-account"
+                size="small"
+              ></v-icon>
+            </div>
+            <div>
+              <span class="me-1">{{ blog.created_at }} </span>
+              <v-icon
+              color="info"
+              icon="mdi-calendar-clock"
               size="small"
             ></v-icon>
+            </div>
+        
+        
+          
           </v-card-subtitle>
         </v-card-item>
         
@@ -66,18 +61,16 @@
             align="center"
             class="mx-0"
           >
-        
-        
             <div class="text-black ms-1 pb-2">
-              H
+           
             </div>
           </v-row>
         
-          <div class="my-4 text-subtitle-1">
-           <v-icon color="blue" class="rounded-xl p-5">mdi-store</v-icon> KendoKenceng Store
+          <div class="my-4 text-slate-600 text-subtitle-1 line-clamp-2">
+            {{ blog.deskripsi }}
           </div>
         
-          <div>{{ blog.deskripsi }}</div>
+          <div class="text-center"><Link :href="route('site_berita.show',{id:blog.id})"><v-btn variant="outlined" color="blue">Baca Selengkapnya</v-btn></Link></div>
         </v-card-text>
         
         <v-divider class="mx-4 mb-10"></v-divider>
@@ -85,7 +78,7 @@
         </v-carousel-item>
         </v-carousel>
         
-        </div>
+    
         <v-card
         class="mt-4"
         height="500"
@@ -106,20 +99,18 @@
 <script setup>  
 
     import { storeToRefs } from 'pinia';
-    import {inject,ref} from 'vue'
+    import {inject,ref,onMounted} from 'vue'
+    import { Link } from '@inertiajs/vue3';
 
     const store = inject('store')
     const { ListBlogs } = storeToRefs(store.blogSiteStore)
-  
-    store.blogSiteStore.fetchBerita();
+
+    onMounted(()=>{
+      store.blogSiteStore.fetchBerita();
+    })
+ 
     const selection  = ref(0);
     const loading = ref(false);
-
-    const lihatDetail = (id) =>{
-        alert(id)
-    }
-
-
-
+  
 
 </script>

@@ -6,16 +6,18 @@
        <sidebar-site/>
       </v-navigation-drawer>
 
-      <v-app-bar color="grey-lighten-4" name="app-bar" elevation="0">
+      <v-app-bar   scroll-behavior="inverted fade-image"
+      scroll-threshold="786"
+      image="/img/carousel2.jpg" name="app-bar" elevation="0">
             <navbar-site/>
       </v-app-bar>
       
       <v-main class="d-flex flex-column align-center bg-slate-200 justify-center">
-        <div :class="mobile ? 'w-full bg-grey-4' : 'w-3/4 bg-slate-400' ">
+        <div :class="mobile ? 'w-full bg-grey-4' : 'w-full bg-grey-lighten-4' ">
           <slot name="carousel"></slot>
         </div>
         
-        <v-container class="bg-slate-200" fluid>
+        <v-container class="bg-grey-lighten-5" fluid>
             <slot name="content"></slot>
         </v-container>
    

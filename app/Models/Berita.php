@@ -18,4 +18,13 @@ class Berita extends Model
         
     ];
     protected $table = 'berita';
+    
+    public function getCreatedAtAttribute($value)
+    {
+        // Ubah format tanggal dan waktu dari format default Laravel ke format Indonesia
+        $tanggalJamIndo = \Carbon\Carbon::parse($value)->format('d/m/Y H:i:s');
+    
+        return $tanggalJamIndo;
+    }
+    
 }

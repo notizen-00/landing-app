@@ -24,6 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('site/mitra/{id}','App\Http\Controllers\MitraController@show')->name('site_mitra.show');
+Route::get('site/berita/{id}','App\Http\Controllers\BeritaController@show')->name('site_berita.show');
 
 Route::middleware('verify_api_key')->group(function () {
     $api_path = 'App\Http\Controllers\Api';

@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('deskripsi_usaha')->nullable();
             $table->string('nama_kecamatan');
             $table->string('alamat_usaha');
+            $table->string('jumlah_karyawan');
             $table->string('no_ijin_usaha');
             $table->string('npwp_usaha');
+            $table->string('foto_usaha')->nullable();
             $table->string('status_mitra');
             $table->timestamps();
         });

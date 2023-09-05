@@ -1,6 +1,6 @@
 <template>
   <v-footer app class="d-sm-flex flex-column d-md-flex-column bg-black">
-    <div class="bg-purple-500 d-sm-flex d-md-flex w-100 align-center d-none d-sm-flex px-4">
+    <div class="bg-blue-900 d-sm-flex d-md-flex w-100 align-center d-none d-sm-flex px-4">
       <strong class="text-sm md:text-lg">Kementerian Pariwisata dan Ekonomi Kreatif/Badan Pariwisata dan Ekonomi Kreatif, Republik Indonesia</strong>
 
       <v-spacer></v-spacer>

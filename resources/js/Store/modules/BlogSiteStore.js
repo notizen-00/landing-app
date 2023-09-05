@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 
 export const useBlogSiteStore = defineStore('blogSiteStore', {
     state: () => ({
-      listBlog: null,
+      listBlog: [],
       topBar:'dashboard'
     }),
     actions: {
@@ -15,7 +15,6 @@ export const useBlogSiteStore = defineStore('blogSiteStore', {
       async fetchBerita(){
 
             const response = await api_helper.get(window.location.origin+'/api/public/berita');
-            console.log(response.data)
             this.listBlog = response.data;
       },
       setTopBar(value){
@@ -25,5 +24,6 @@ export const useBlogSiteStore = defineStore('blogSiteStore', {
     getters: {
       ListBlogs: (state) => state.listBlog,
       getTopBar: (state) => state.topBar
-    }
+    },
+    persist:true
   })

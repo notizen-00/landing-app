@@ -12,7 +12,7 @@
   
         <div class="divide-x-4 divide-red-500 d-inline"></div>
         <Link :href="route('login')">
-        <v-btn prepend-icon="mdi-login" color="primary" variant="outlined">
+        <v-btn prepend-icon="mdi-login" color="blue" variant="outlined">
           Masuk/Daftar
         </v-btn>
         </Link>
