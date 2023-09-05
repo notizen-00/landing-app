@@ -105,7 +105,8 @@
 
         <SectionTitle title="Gallery" class="mt-4"/>
         <GallerySection class="mt-4"/>
-
+        <SectionTitle title="Berita" class="mt-4"/>
+        <BlogSection class="mt-4" />
     </template>
     <template #content v-else>
         
@@ -120,6 +121,7 @@
   import AboutSection from '@/Components/Site/Mobile/AboutSection.vue'
   import MitraSection from '@/Components/Site/Mobile/MitraSection.vue'
   import GallerySection from '@/Components/Site/Mobile/GallerySection.vue'
+  import BlogSection from '@/Components/Site/Mobile/BlogSection.vue'
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
   import { useDisplay } from "vuetify";

@@ -53,6 +53,7 @@
   if(page.url === '/mitra-app/mitra_toko'){
     tabs.value=2;
     store.mitraStore.setTopBar('TOKO')
+    
   }
 
   if(page.url === '/mitra-app/mitra_account'){

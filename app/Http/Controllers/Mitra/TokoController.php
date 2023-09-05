@@ -95,7 +95,7 @@ class TokoController extends Controller
             $data['foto_usaha'] = $fileName;
         }
     
-       $update = Mitra::where('id',$id)->update($data);
+        $update = Mitra::where('id',$id)->update($data);
     
         if($update){
             return to_route('mitra_toko.index');

@@ -12,9 +12,12 @@ import * as directives from 'vuetify/directives'
 import { VStepper } from 'vuetify/labs/VStepper'
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import { VBottomSheet } from 'vuetify/labs/VBottomSheet'
+
 import '@mdi/font/css/materialdesignicons.css'
 import { pinia } from './Store/pinia'
 import { useStore } from '@/Store/modules'
+
+
 
 const vuetify = createVuetify({
     components: {

@@ -31,6 +31,7 @@ Route::middleware('verify_api_key')->group(function () {
     Route::get('api/public/mitra',$api_path.'\MitraController@getMitra');
     Route::get('api/public/mitra/{id}',$api_path.'\MitraController@show');
     Route::get('api/public/produk/mitra/{id}',$api_path.'\MitraController@showProduk');
+    Route::get('api/public/berita',$api_path.'\BeritaController@index');
     
 });
 
@@ -50,7 +51,7 @@ Route::middleware([
     Route::resource('api/program',$api_path.'\ProgramController');
     Route::get('api/mitra/{id}/verifikasi',$api_path.'\MitraController@verifikasi');
     Route::resource('api/mitra',$api_path.'\MitraController');
-  
+    Route::resource('api/berita',$api_path.'\BeritaController');
     Route::get('api/produk/mitra/{id}',$api_path.'\ProdukController@showByMitra')->name('api_produk.bymitra');
     Route::resource('api/produk',$api_path.'\ProdukController');
     
@@ -65,6 +66,7 @@ Route::middleware([
         Route::resource('admin-app/admin_mitra',$admin_path.'\MitraController');
         Route::resource('admin-app/admin_blog',$admin_path.'\BlogController');
         Route::resource('admin-app/admin_pengaturan',$admin_path.'\PengaturanController');
+        Route::resource('admin-app/admin_berita',$admin_path.'\BeritaController');
         Route::get('/generate-api-key', $admin_path.'\ApiKeyController@generateApiKey');
 
     });

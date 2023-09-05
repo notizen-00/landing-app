@@ -30,6 +30,7 @@ export const useTokoStore = defineStore('tokoStore', {
     getters: {
       getTargetProduk:(state)=>state.target_produk,
       getDetailMitra: (state) => state.detailMitra,
+      
       getDialog:(state)=> state.dialog
       
     },
