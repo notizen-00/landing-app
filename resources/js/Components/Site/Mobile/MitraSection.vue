@@ -52,9 +52,7 @@
                   </template>
                 {{ value.nama_kecamatan }}
               </v-chip><br>
-             
-
-    
+            
             </v-card-subtitle>
           </v-card-item>
           <div class="text-subtitle-3 ml-3 -mb-1 -mt-5">

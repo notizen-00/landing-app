@@ -3,9 +3,11 @@
       <div class="mr-auto justify-start"><v-avatar image="/img/logo.png" size="50" class="m-2" color="blue" ></v-avatar></div>
   
       <div class="m-3">
+        <Link :href="route('site')">
         <v-btn class="hover:divide-x-4" variant="plain">
           Beranda
         </v-btn>
+        </Link>
         <v-btn class="hover:divide-x-4" variant="plain">Program</v-btn>
         
         <v-btn class="mr-10 hover:divide-x-4" variant="plain">Berita & Pengumuman</v-btn>

@@ -98,7 +98,7 @@
                 </v-card-actions>
             </v-card>
 
-            <ListProduk />
+            <ListProdukDesktop />
 
         </template>
     </SiteLayout>
@@ -106,6 +106,7 @@
 <script setup>
     import SiteLayout from "@/Layouts/SiteLayout.vue";
     import HeaderDetailMobile from '@/Components/Site/Mobile/Partial/DetailMitraHeader.vue'
+    import ListProdukDesktop from '@/Components/Site/Desktop/Partial/ListProduk.vue'
     import ListProduk from '@/Components/Site/Mobile/Partial/ListProdukMitra.vue'
 
     import {

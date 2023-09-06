@@ -21,7 +21,7 @@ use App\Models\Mitra;
 
 Route::get('/', function () {
     return Inertia::render('Site/Index');
-});
+})->name('site');
 
 Route::get('site/mitra/{id}','App\Http\Controllers\MitraController@show')->name('site_mitra.show');
 Route::get('site/berita/{id}','App\Http\Controllers\BeritaController@show')->name('site_berita.show');

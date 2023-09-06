@@ -5,8 +5,8 @@ import { api_helper } from '@/Service/FetchHelper'
 export const useProdukSiteStore = defineStore('produkSiteStore', {
 
   state: () => ({
-    produk: null,
-    detailProduk: null,
+    produk: [],
+    detailProduk: [],
     
   }),
   actions: {
