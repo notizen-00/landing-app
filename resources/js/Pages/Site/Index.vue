@@ -163,6 +163,8 @@
       <MitraSectionDesktops class="mt-10"/>
 
       <GallerySectionDesktops class="mt-10"/>
+      
+      <BlogSectionDesktops class="mt-10"/>
 
         
     </template>
@@ -180,6 +182,7 @@
   import AboutSectionDesktops from '@/Components/Site/Desktop/AboutSections.vue'
   import MitraSectionDesktops from '@/Components/Site/Desktop/MitraSection.vue'
   import GallerySectionDesktops from "@/Components/Site/Desktop/GallerySection.vue";
+  import BlogSectionDesktops from "@/Components/Site/Desktop/BlogSection.vue";
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
   import { useDisplay } from "vuetify";

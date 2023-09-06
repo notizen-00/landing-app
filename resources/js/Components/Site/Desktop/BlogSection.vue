@@ -1,10 +1,18 @@
 <template>
    
-
+    <div class="text-center items-center text-h4 relative pb-10 pt-10 pl-10">
+        <span class="font-serif pb-4"> -- List Berita -- </span> 
+        <v-divider
+        :thickness="5"
+        class="border-opacity-100 absolute border-3 right-1/4  w-1/2 mt-4 border-yellow-400"
+        color="warning"
+        ></v-divider>
+     </div>
     <v-carousel
     v-if="ListBlogs.length > 0"
     class="mt-3 mb-10 rounded-t-xl"
     show-arrows="hover"
+    height="600"
     hide-delimiters
     progress="primary"
     v-model="selection"
@@ -21,8 +29,9 @@
     <v-card-item>
       <v-img
       cover
-      height="150"
-      class="m-5"
+      height="250"
+      max-width="500"
+      class="m-5 mx-auto"
       src="/img/thumbnail.avif"
     >
     </v-img>
@@ -75,6 +84,7 @@
     
     <v-divider class="mx-4 mb-10"></v-divider>
     </v-card>
+
     </v-carousel-item>
     </v-carousel>
     
@@ -85,7 +95,7 @@
     v-if="ListBlogs.length <= 0">
         <v-img
         class="align-center mt-40 items-center justify-center text-white"
-        height="200"
+        height="300"
         src="/img/produk_kosong.png"
         
       >
