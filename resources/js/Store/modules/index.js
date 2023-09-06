@@ -10,6 +10,7 @@ import { useTokoStore } from './TokoStore'
 import { useProdukSiteStore } from './ProdukSiteStore'
 import { useBlogStore } from './BlogStore'
 import { useBlogSiteStore } from './BlogSiteStore'
+import { useProgramStore } from './ProgramStore'
 // Impor modul-modul lain jika ada
 
 export function useStore() {
@@ -25,6 +26,7 @@ export function useStore() {
     produkSiteStore:useProdukSiteStore(),
     blogStore:useBlogStore(),
     blogSiteStore: useBlogSiteStore(),
+    programStore: useProgramStore(),
     // Masukkan modul-modul lain di sini jika ada
   }
 }

@@ -8,9 +8,33 @@
           Beranda
         </v-btn>
         </Link>
-        <v-btn class="hover:divide-x-4" variant="plain">Program</v-btn>
+        <!-- <v-btn class="hover:divide-x-4" variant="plain">Program</v-btn> -->
+
+        <v-btn
+        text
+        variant="plain"
+        class="hover:divide-x-4" 
+      >
+   
+       <span> Program <v-icon right>mdi-menu-down</v-icon></span>
+ 
+       <!-- <span >Program</span> -->
+  
+        <v-menu activator="parent">
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in "
+              :key="index"
+              :value="index"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-btn>
         
-        <v-btn class="mr-10 hover:divide-x-4" variant="plain">Berita & Pengumuman</v-btn>
+        <v-btn class=" hover:divide-x-4" variant="plain">Berita & Pengumuman</v-btn>
+        <v-btn class="mr-10 hover:divide-x-4" variant="plain">Hubungi Kami</v-btn>
   
         <div class="divide-x-4 divide-red-500 d-inline"></div>
         <Link :href="route('login')">

@@ -106,7 +106,7 @@
 <script setup>  
 
     import { storeToRefs } from 'pinia';
-import {inject,ref} from 'vue'
+    import {inject,ref} from 'vue'
 
     const store = inject('store')
     const { getProduk } = storeToRefs(store.produkSiteStore)
