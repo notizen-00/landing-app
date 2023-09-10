@@ -23,11 +23,11 @@
         <v-menu activator="parent">
           <v-list>
             <v-list-item
-              v-for="(item, index) in "
+              v-for="(item, index) in listProgram"
               :key="index"
               :value="index"
             >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title><Link :href="route('site_program.show',{id:item.id})">{{ item.nama_program }}</Link></v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -62,6 +62,7 @@
   
   <script setup>
   import { inject, computed, ref } from 'vue';
+  import { storeToRefs } from 'pinia'
   import { Link } from '@inertiajs/vue3';
   import AuthLayout from '@/Layouts/AuthLayout.vue';
   
@@ -70,6 +71,8 @@
   const ToggleDialog = () => {
     dialog.value = !dialog.value
   }
+  const {listProgram } = storeToRefs(store.programStore)
+  store.programStore.fetchProgram();
  
   const isOverlayActive = computed(() => store.overlay.isOverlayActive);
   

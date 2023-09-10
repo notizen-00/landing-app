@@ -1,28 +1,19 @@
 <template>
-  <v-footer app class="d-sm-flex flex-column d-md-flex-column bg-black">
-    <div class="bg-blue-900 d-sm-flex d-md-flex w-100 align-center d-none d-sm-flex px-4">
-      <strong class="text-sm md:text-lg">Kementerian Pariwisata dan Ekonomi Kreatif/Badan Pariwisata dan Ekonomi Kreatif, Republik Indonesia</strong>
-
-      <v-spacer></v-spacer>
-     
-      <div class="d-flex justify-center">
-
-        <v-btn
-        v-for="icon in icons"
-        :key="icon"
-        class="mx-4"
-        :icon="icon"
-        variant="plain"
-        size="small"
-      ></v-btn>
-      </div>
-      
+  <!-- <div class="d-none d-sm-flex  absolute bottom-0 h-14 z-50" style="background-color:#162640">
+    
+    <div class="px-4 py-5 md:bg-blue-900 text-center sm:bg-blue-300 w-100">
+       <span class="text-slate-200"> © {{ new Date().getFullYear() }} </span> <strong class="text-slate-200">Kementerian Pariwisata dan Ekonomi Kreatif/Badan Pariwisata dan Ekonomi Kreatif, Republik Indonesia</strong>
     </div>
 
-    <div class="px-4 py-2 md:bg-black text-center sm:bg-blue-300 w-100">
-        © {{ new Date().getFullYear() }} <strong class="text-blue-300">Landing-App</strong>
-    </div>
-  </v-footer> 
+  </div>  -->
+
+  
+
+  <v-footer app class="d-flex d-sm-none">
+    <div class="px-4 py-5 md:bg-blue-900 text-center sm:bg-blue-300 w-100">
+     <span class="text-slate-200"> © {{ new Date().getFullYear() }} </span> <strong class="text-slate-200">Kementerian Pariwisata dan Ekonomi Kreatif/Badan Pariwisata dan Ekonomi Kreatif, Republik Indonesia</strong>
+  </div>
+  </v-footer>
 </template>
 
   

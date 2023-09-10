@@ -32,24 +32,24 @@
             </div>
           <!-- </v-card-title> -->
         
-          <v-card-subtitle class="d-flex justify-between">
-            <div>
-              <span class="me-1">{{ blog.author }} </span>
-        
-              <v-icon
-                color="error"
-                icon="mdi-account"
-                size="small"
-              ></v-icon>
-            </div>
-            <div>
-              <span class="me-1">{{ blog.created_at }} </span>
-              <v-icon
-              color="info"
-              icon="mdi-calendar-clock"
+        <v-card-subtitle class="d-flex justify-between">
+          <div>
+            <span class="me-1">{{ blog.author }} </span>
+      
+            <v-icon
+              color="error"
+              icon="mdi-account"
               size="small"
             ></v-icon>
-            </div>
+          </div>
+          <div>
+            <span class="me-1">{{ blog.created_at }} </span>
+            <v-icon
+            color="info"
+            icon="mdi-calendar-clock"
+            size="small"
+          ></v-icon>
+          </div>
         
         
           

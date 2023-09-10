@@ -4,7 +4,7 @@ import { api_helper } from '@/Service/FetchHelper'
 export const useProgramStore = defineStore('programStore', {
     state: () => ({
       selectedFilter: 'kecamatan',
-      listMitra:[],
+      listProgram:[],
       searchQuery: '',
       detailMitra:[],
       mitraId:0
@@ -30,7 +30,7 @@ export const useProgramStore = defineStore('programStore', {
     },
     getters: {
       getSelectedFilter: (state) => state.selectedFilter,
-      getListMitra: (state) => state.listMitra,
+      ListProgram: (state) => state.listProgram,
       getDetailMitra:(state) => state.detailMitra
     },
     persist:true

@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('site/mitra/{id}','App\Http\Controllers\MitraController@show')->name('site_mitra.show');
 Route::get('site/berita/{id}','App\Http\Controllers\BeritaController@show')->name('site_berita.show');
+Route::get('site/program/{id}','App\Http\Controllers\ProgramController@show')->name('site_program.show');
 
 Route::middleware('verify_api_key')->group(function () {
     $api_path = 'App\Http\Controllers\Api';
@@ -33,6 +34,7 @@ Route::middleware('verify_api_key')->group(function () {
     Route::get('api/public/mitra/{id}',$api_path.'\MitraController@show');
     Route::get('api/public/produk/mitra/{id}',$api_path.'\MitraController@showProduk');
     Route::get('api/public/berita',$api_path.'\BeritaController@index');
+    Route::get('api/public/program',$api_path.'\ProgramController@index');
     
 });
 

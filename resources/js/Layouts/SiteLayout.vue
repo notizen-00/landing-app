@@ -21,9 +21,10 @@
             <slot name="content"></slot>
         </v-container>
    
-      </v-main>
-      
-        <Footer/>
+       </v-main>
+       
+     <!-- <FooterSection/>
+      <Footer/>  -->
      
     </v-layout>
   </template>
@@ -34,12 +35,10 @@
   import Footer from '@/Layouts/Partial/Site/Footer.vue'
   import NavbarSite from '@/Layouts/Partial/Site/Navbar.vue'
   import SidebarSite from '@/Layouts/Partial/Site/Mobile/Sidebar.vue'
+  import FooterSection from '@/Layouts/Partial/Site/FooterSection.vue'
  
-
-
-  
   export default {
-    components: { Footer, NavbarSite ,SidebarSite },
+    components: { Footer, NavbarSite ,SidebarSite,FooterSection },
     setup() {
       const store = inject('store')
       const { width, mobile } = useDisplay()
@@ -54,7 +53,8 @@
       return {
         isOverlayActive,
         toggleOverlay,
-        mobile
+        mobile,
+      
     
       }
     },

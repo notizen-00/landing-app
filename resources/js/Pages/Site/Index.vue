@@ -166,6 +166,25 @@
       
       <BlogSectionDesktops class="mt-10"/>
 
+
+      <div class="relative z-50 w-screen">
+        <FooterSectionDesktops/>
+      </div>
+    
+     <div class="relative z-10">
+      <v-footer
+      class="d-none d-sm-flex z-10 text-center absolute -left-6 -bottom-4 w-screen"
+      style="background-color:#182740"
+    >
+    
+      <div class="w-full text-slate-100 h-16 m-8">
+        © {{ new Date().getFullYear() }}<strong>  Kementerian Pariwisata dan Ekonomi Kreatif/Badan Pariwisata dan Ekonomi Kreatif, Republik Indonesia</strong>
+      </div>
+    </v-footer>
+    
+     </div>
+    
+
         
     </template>
 
@@ -183,6 +202,7 @@
   import MitraSectionDesktops from '@/Components/Site/Desktop/MitraSection.vue'
   import GallerySectionDesktops from "@/Components/Site/Desktop/GallerySection.vue";
   import BlogSectionDesktops from "@/Components/Site/Desktop/BlogSection.vue";
+  import FooterSectionDesktops from "@/Layouts/Partial/Site/FooterSection.vue";
   import { storeToRefs } from "pinia";
   import { ref,inject,onMounted,computed,watch } from "vue";
   import { useDisplay } from "vuetify";
