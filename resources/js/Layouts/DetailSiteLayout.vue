@@ -20,9 +20,9 @@
         <v-container class="bg-grey-lighten-5" fluid>
             <slot name="content"></slot>
         </v-container>
-        
+        <FooterSection/>
        </v-main>
-       <FooterSection/>
+       
     
       <Footer/> 
      

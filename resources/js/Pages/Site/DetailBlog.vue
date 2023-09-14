@@ -88,7 +88,7 @@
   
 </template>
 <script setup>
-import SiteLayout from '@/Layouts/SiteLayout.vue'
+import SiteLayout from '@/Layouts/DetailSiteLayout.vue'
 import HeaderDetailMobiles from '@/Components/Site/Mobile/Partial/DetailBlogHeaders.vue'
 
 import { storeToRefs } from "pinia";

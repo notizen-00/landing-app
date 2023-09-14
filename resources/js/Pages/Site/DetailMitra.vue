@@ -104,7 +104,7 @@
     </SiteLayout>
 </template>
 <script setup>
-    import SiteLayout from "@/Layouts/SiteLayout.vue";
+    import SiteLayout from "@/Layouts/DetailSiteLayout.vue";
     import HeaderDetailMobile from '@/Components/Site/Mobile/Partial/DetailMitraHeader.vue'
     import ListProdukDesktop from '@/Components/Site/Desktop/Partial/ListProduk.vue'
     import ListProduk from '@/Components/Site/Mobile/Partial/ListProdukMitra.vue'
